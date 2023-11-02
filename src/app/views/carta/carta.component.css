@@ -1,0 +1,240 @@
+
+@font-face {
+    font-family: 'Lato-Light';
+    src: url(../../../assets/fonts/Lato-Light.ttf);
+}
+
+@font-face {
+    font-family: 'Lato-Regular';
+    src: url(../../../assets/fonts/Lato-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'BebasNeue';
+    src: url(../../../assets/fonts/BebasNeue.ttf);
+}
+
+.roboto_font{
+    font-family: 'Lato-Regular';
+}
+
+.bebas_font{
+    font-family: 'BebasNeue';
+}
+
+section{
+    font-family: 'Lato-Light';
+    color: rgb(225, 217, 183);
+    font-size: 18px;
+}
+
+.nav{
+    font-family: 'Lato-Light';
+    font-size: 20px;
+}
+
+.logo{
+    height: 120px;
+    width: auto;
+}
+
+.separacion {
+    width: 100%;
+    height: 50px;
+    background-image: url('../../../assets/images/fondo.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.navbar-nav .nav-link {  
+   color: rgb(225, 217, 183);
+    transition: font-size 0.5s, color 0.5s; /* Agrega una transición suave */
+}
+
+.navbar-nav .nav-link:hover {
+    color: white;/* Cambia el color del texto al pasar el ratón */
+    font-size: 25px;
+}
+
+.ico{
+    color: rgb(225, 217, 183);
+    font-size: 22px;
+}
+.ico:hover{
+    color: white;
+}
+.collapse:not(.show) {
+    justify-content: center;
+}
+
+.background-section {
+    position: relative;
+    width: 100%;
+    height: 100%; 
+    background-image: url("../../../assets/images/fondo_palillos.png"); 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center; 
+    z-index: 1;  
+}
+
+video {
+    width: auto;
+    height: 400px;
+    margin-top: 125px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 1);
+    filter: brightness(0.7) sepia(0.2);   
+}
+
+.video_container{
+    display: flex;
+    justify-content: center; 
+    align-items: center;   
+}
+
+.slogan {   
+    color: rgb(225, 217, 183);
+    text-align: center;
+    position: absolute;    
+}
+
+.s1 {
+    left: 21%;
+    font-size: 20px;
+    top: 2%;
+}
+
+.s2 {
+    font-size: 90px;
+    top: 2.5%;
+    left: 10%;
+}
+
+.s3 {
+    font-size: 90px;
+    top: 15%; 
+    right: 10%;
+}
+
+.info{
+    margin-top: 250px;  
+}
+
+.titles{
+    font-size: 60px;
+    margin-top: 120px;
+}
+
+.image_container{
+    display: grid;
+    place-items: center;  
+}
+
+.image_container img{
+    width: 100%; 
+    height: auto;
+}
+
+b{
+    color: white;
+}
+
+.galery{
+    display: flex;
+    height: 300px;
+    width: 100%;
+    margin-bottom: 70px;
+}
+
+.galery img{
+    width: 0;
+    flex-grow: 1;
+    object-fit: cover;
+    opacity: .5;
+    transition: .5 ease;
+}
+
+.galery img:hover{
+    cursor: pointer;
+    width: 300px;
+    opacity: 1;
+    filter: contrast(120%);
+}
+
+@media (max-width: 991px){
+    .s1{
+        left: 0;
+        right: 0;
+    }
+
+    .s2, .s3{
+        left: 0;
+        right: 0;
+        font-size: 55px;
+    }
+    
+    .info{
+        margin-top: 60px;
+    }
+
+    .titles{
+        font-size: 30px;
+        margin-top: 40px;
+    }
+
+    video{
+        height: 250px;
+        width: auto;
+    }
+
+    .image_container img{
+        width: 60%; 
+        height: auto;
+    }
+
+    .galery img:hover{    
+        width: 150px;  
+    }
+}
+
+
+.card-text {
+    max-height: 3em; /* Establece la altura máxima en 3 líneas */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Agrega puntos suspensivos (...) si el texto se recorta */
+    white-space: nowrap; /* Evita el desbordamiento de texto a la siguiente línea */
+}
+
+.imagen_carta {
+    height: 270px;
+    width: auto;
+}
+
+.titulo_carta{
+    font-size: 60px;
+}
+
+.carta {
+    color: rgb(225, 217, 183);
+    max-width: 300px;
+    border: 1px solid  rgb(78, 77, 77);
+}
+
+#pedido_div {
+    position: sticky;
+    top: 10px;
+    transform: translate(60px, 0%);
+    z-index: 1;
+    border: 4px solid rgb(225, 217, 183); 
+    border-radius: 40px;
+    padding: 20px;
+}
+
+@media (width < 1200px) {
+    #carro{
+        display: none;
+    }
+}
+
+

@@ -1,0 +1,86 @@
+<app-header></app-header> <!-- COMPONENTE HEADER-->
+
+<section class="container background-section">
+
+    <div class="row">
+      <div class="video_container bebas_font">
+        <video autoplay muted preload loop>
+          <source src="../../../assets/videos/video_kenko.mp4" type="video/mp4">
+          Tu navegador no es compatible con videos html5
+        </video>
+        <p class="slogan s1 ">KENKÖ ASIAN FOOD</p>
+        <p class="slogan s2">DISFRUTA DEL INESPERADO</p>
+        <p class="slogan s3">PLACER DEL SUSHI</p>
+      </div>
+    </div>
+
+    <div class="row info">
+      <div class="col-md-6 col-xl-5 text_container first_col">
+        <h2 class="bebas_font titles">UN NUEVO CONCEPTO DE COMIDA JAPONESA</h2>
+        <p class="mt-md-5">Kenkö es sinónimo de la deliciosa sencillez del <b>Maki </b>más tradicional,
+        de los bocados explosivos de <b>Nigiri</b> o de la innovación de los <b>Flamed Rolls</b>. 
+        Es la colorida fiesta de los uramaki o la sofisticación de los <b>Gunkan</b>. 
+        Y, por eso, es el lugar predilecto de los amantes del sushi y la parada ineludible de aquellos que se están iniciando.</p>
+      </div>
+      <ng-container *ngIf="isLargeScreen">
+        <div class="col-xl-2"></div>
+    </ng-container>
+      <div class="col-md-6 col-xl-5 image_container">
+        <img src="../../../assets/images/info_1.jpg">
+      </div>
+    </div>
+
+    <div class="row info">  
+      <div class="col-md-6 col-xl-5 image_container first_col">
+        <img src="../../../assets/images/info_2.jpg">
+      </div>
+        <ng-container *ngIf="isLargeScreen">
+            <div class="col-xl-2"></div>
+        </ng-container>
+      
+      <div class="col-md-6 col-xl-5 text_container">
+        <div>
+            <h2 class="bebas_font titles">Déjate sorprender por la experiencia Kenkö</h2>
+            <p class="mt-md-5">Y no solo el <b>sabor</b> es importante. Para nosotros, el ambiente es una parte fundamental de la <b>experiencia</b>. 
+              Queremos que te sientas como en casa, por eso, nuestros locales cuentan con una decoración tranquila y relajada,
+              que invita a dejar los problemas y preocupaciones en la puerta para <b>disfrutar</b> al máximo con nuestra propuesta.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-8 offset-md-2 col-xl-5 offset-xl-3 first_col ">
+        <h2 class="bebas_font titles">CONOCE NUESTRA CARTA</h2>
+        <p class="mt-md-5">En <b>Kenkö</b> siempre encontrarás una opción que te sorprenderá, de la mano de 
+          <b>ingredientes de máxima calidad</b>
+          , como atún, salmón, langostinos, aguacate, setas o verduras en tempura. Con una carta que incluye una 
+          <b>amplia variedad de tipos de sushi</b>, 
+          cada comensal da con su comida favorita. Porque la hay para los más atrevidos y los más tradicionales, 
+          para los más sanos y para aquellos que prefieren un poco más de salsa.
+        </p>
+        <p>Y si nos permites una pequeña recomendación… Atrévete con nuestros <b>increíbles Flamed Rolls</b>, nuestra experiencia en mayúsculas: <b>
+          sushi flambeado frente a tu mesa que te dejará con la boca abierta</b>.
+        </p>  
+      </div>
+
+    </div>
+    <div class="row">
+        <div class="galery mt-5 mt-md-5">
+            <img src="../../../assets/images/galeria_images/galeria_1.jpg">
+            <img src="../../../assets/images/galeria_images/galeria_2.jpg">
+            <img src="../../../assets/images/galeria_images/galeria_3.jpg">
+            <img src="../../../assets/images/galeria_images/galeria_4.jpg">
+            <img src="../../../assets/images/galeria_images/galeria_5.jpg">
+            <img src="../../../assets/images/galeria_images/galeria_6.jpg">
+            <img src="../../../assets/images/galeria_images/galeria_7.jpg">
+        </div>
+    </div>
+      
+      
+    
+
+</section>
+
+
+<app-footer></app-footer>  <!--COMPONENTE FOOTER-->

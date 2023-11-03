@@ -17,6 +17,8 @@ import { TooltipDelayComponent } from './components/tooltip-delay/tooltip-delay.
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterComponent } from './views/auth/register/register.component';
 import { LoginComponent } from './views/auth/login/login.component';
+import { PerfilUsuarioComponent } from './views/perfil-usuario/perfil-usuario.component';
+import { PerfilAdminComponent } from './views/perfil-admin/perfil-admin.component';
 
 
 @NgModule({
@@ -33,6 +35,8 @@ import { LoginComponent } from './views/auth/login/login.component';
     TooltipDelayComponent,
     RegisterComponent,
     LoginComponent,
+    PerfilUsuarioComponent,
+    PerfilAdminComponent,
     
   ],
   imports: [

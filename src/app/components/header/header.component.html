@@ -34,13 +34,24 @@
 
                 <div class="mb-3 mb-md-0 col-12 col-md-4 d-flex align-items-center justify-content-center justify-content-lg-center justify-content-md-end">
 
-                    <a href="">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi-person-circle m-3 ico"></i>
-                    </a>
+                        </button>
+                        
+                        <ul class="dropdown-menu">
+
+                            <!--Estas dos etiquetas se mostraran solo a los usuarios que no han iniciado sesión-->
+                                <li><a class="dropdown-item"  routerLink="/register" >Registrarse</a></li>
+                                <li><a class="dropdown-item" routerLink="/login" >Iniciar Sesión</a></li>  
+                                <li><a class="dropdown-item" (click)="usuariosService.logout()" *ngIf="usuariosService.isAuth()">Cerrar Sesión</a></li>
+                                <li><a class="dropdown-item" *ngIf="usuariosService.isAuth()">Perfil</a></li> 
+                        </ul>
+                    </div>
+
                     <a href="#">
                         <i class="bi-cart2 ico m-3 "></i>
-                    </a>  
-
+                    </a> 
                 </div>       
             </nav>
         </div>

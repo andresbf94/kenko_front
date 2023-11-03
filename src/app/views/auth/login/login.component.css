@@ -1,0 +1,35 @@
+@font-face {
+    font-family: 'Lato-Light';
+    src: url(../../../../assets/fonts/Lato-Light.ttf);
+}
+@font-face {
+    font-family: 'BebasNeue';
+    src: url(../../../../assets/fonts/BebasNeue.ttf);
+}
+.bebas_font{
+    font-family: 'BebasNeue';
+}
+
+.logo{
+    height: 150px;
+    width: auto;
+    margin-left: 545px;
+    margin-top: 100px;
+    margin-bottom: 30px;
+}
+.g{
+    width: 50%;
+}
+.card {
+    font-family: 'Lato-Light';
+    color: rgb(225, 217, 183);
+    font-size: 18px;
+}
+.form-control{
+    background-color: rgb(225, 217, 183, 0.1);
+}
+button{
+    font-family: 'Lato-Light';
+    color: rgb(225, 217, 183);
+    font-size: 18px;
+}

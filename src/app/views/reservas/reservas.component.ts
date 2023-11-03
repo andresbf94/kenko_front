@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { ReservasService } from 'src/app/service/reservas.service';
+import { ReservasService } from 'src/app/services/reservas.service';
 
 @Component({
   selector: 'app-reservas',
@@ -12,10 +12,27 @@ export class ReservasComponent {
   formulario: FormGroup;
   mensaje: string = '';
 
+  get nombre (){
+    return this.formulario.get('nombre') as FormControl;
+  }
+  get email (){
+    return this.formulario.get('email') as FormControl;
+  }
+  get numPer (){
+    return this.formulario.get('numPer') as FormControl;
+  }
+  get hora (){
+    return this.formulario.get('hora') as FormControl;
+  }
+  get fecha (){
+    return this.formulario.get('fecha') as FormControl;
+  }
+
+
   constructor( private reservasService:ReservasService, fb:FormBuilder){
     this.formulario = fb.group({
       nombre: ['', [Validators.required]],
-      correo: ['',[Validators.required]],
+      email: ['',[Validators.required, Validators.email]],
       numPer: ['',[Validators.required]],
       hora: ['',[Validators.required]],
       fecha: ['',[Validators.required]],

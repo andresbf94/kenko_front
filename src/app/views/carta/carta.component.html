@@ -1,32 +1,33 @@
 <app-header></app-header>
 <section class="container background-section">
-    <div class="row m-5 text-center">
+    <div class="row mt-5 text-center">
       <h1 class="bebas_font titulo_carta">La Carta</h1>
     </div>
   
-    <div class="row mb-5">
+    <div class="row">
       <div class="col-12 col-xl-9" id="bloque_1">
         <div class="row">
           <!-- Angular no usa Blade, por lo que no necesitas la lógica Blade aquí -->
-          <div class="row" *ngFor="let categoria of productos">
-            <h1 class="bebas_font titulo_sec mt-5">{{ categoria}}</h1>
-          </div>
-          <div class="row">
-            <div class="col-lg-4 col-md-6 p-3" *ngFor="let producto of productos">
-              <div class="card carta">
-                <img [src]="producto.imagen" class="card-img-top imagen_carta" [alt]="producto.nombre">
-                <h5 class="card-title mx-4 mt-3">{{ producto.nombre }}</h5>
-                <p class="card-text mx-4">{{ producto.descripcion }}</p>
-                <p class="card-text mx-4">{{ producto.precio }} €</p>
-  
-                <input type="hidden" name="nombre" [value]="producto.nombre">
-                <input type="hidden" name="precio" [value]="producto.precio">
-                <input type="hidden" name="idProd" [value]="producto.id">
-  
-                <div class="card-text row">
-                  <input class="mx-4 mb-3" type="number" name="unidades" style="width: 60px;" value="0" min="0" max="9">
-                  <input class="w-25 p-1 mx-2 mb-3" name="add" type="submit" value="Añadir">
-                  <input class="w-25 p-1 mx-2 mb-3" name="delete" type="submit" value="Eliminar">
+          <div class="row" *ngFor="let categoria of categoriasProductos | keyvalue">
+            <h1 class="bebas_font titulo_sec mt-5">{{ categoria.key }}</h1>
+         
+            <div class="row">
+              <div class="col-lg-4 col-md-6 p-3" *ngFor="let producto of categoria.value">
+                <div class="card carta">
+                  <img [src]="serverUrl + '/' + producto.imagen" class="card-img-top imagen_carta" [alt]="producto.nombre">
+                  <h5 class="card-title mx-4 mt-3">{{ producto.nombre }}</h5>
+                  <p class="card-text mx-4">{{ producto.descripcion }}</p>
+                  <p class="card-text mx-4">{{ producto.precio }} €</p>
+    
+                  <input type="hidden" name="nombre" [value]="producto.nombre">
+                  <input type="hidden" name="precio" [value]="producto.precio">
+                  <input type="hidden" name="idProd" [value]="producto.id">
+    
+                  <div class="card-text row">
+                    <input class="mx-4 mb-3" type="number" name="unidades" style="width: 60px;" value="0" min="0" max="9">
+                    <input class="w-25 p-1 mx-2 mb-3" name="add" type="submit" value="Añadir">
+                    <input class="w-25 p-1 mx-2 mb-3" name="delete" type="submit" value="Eliminar">
+                  </div>
                 </div>
               </div>
             </div>

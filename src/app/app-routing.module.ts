@@ -5,14 +5,17 @@ import { InicioComponent } from './views/inicio/inicio.component';
 import { CartaComponent } from './views/carta/carta.component';
 import { ReservasComponent } from './views/reservas/reservas.component';
 import { InformacionComponent } from './views/informacion/informacion.component';
+import { RegisterComponent } from './views/auth/register/register.component';
+import { LoginComponent } from './views/auth/login/login.component';
 
 const routes: Routes =[
 
   { path: '', component: InicioComponent},
   { path: 'carta', component: CartaComponent},
   { path: 'reservas', component: ReservasComponent},
-  { path: 'informacion', component: InformacionComponent}
-
+  { path: 'informacion', component: InformacionComponent},
+  { path: 'register', component: RegisterComponent},
+  { path: 'login', component: LoginComponent}
   
 ] 
 

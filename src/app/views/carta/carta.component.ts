@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ProductosService } from 'src/app/service/productos.service';
+import { ProductosService } from 'src/app/services/productos.service';
+import { serverRoute } from 'src/app/app.component';
 
 @Component({
   selector: 'app-carta',
@@ -8,24 +9,44 @@ import { ProductosService } from 'src/app/service/productos.service';
 })
 export class CartaComponent {
 
-carrito:any=[];
-productos: any = [];
-usuario:any =[];
+  serverUrl = serverRoute;
+  carrito: any = [];
+  productos: any = [];
+  usuario: any = [];
+  categoriasProductos: { [key: string]: any[] } = {};
 
-  constructor (private productoService: ProductosService ){
-  }
-  
-  ngOnInit(){
-    this.productoService.getAll().subscribe(
-      {
-        next: resp =>{
-          this.productos = resp;
-          console.log(this.productos)
-        },
-        error: error=>{
-          console.error('Error al recuperar los productos: ', error) 
-        }
-      });
+  constructor(private productoService: ProductosService) {
   }
 
+  ngOnInit() {
+    this.obtenerProductos();
+    
+  }
+
+  obtenerProductos() {
+    this.productoService.getAll().subscribe({
+      next: data => {
+        this.productos = data;
+        this.organizarProductos(this.productos);
+        console.log('productos organizados:', this.categoriasProductos);
+      },
+      error: error => {
+        console.error('Error al recuperar los productos: ', error);
+      }
+    });
+  }
+
+  organizarProductos(productos: any) {
+    productos.forEach((producto: any) => {
+      if (!this.categoriasProductos[producto.categoria]) {
+        this.categoriasProductos[producto.categoria] = [];
+      }
+      this.categoriasProductos[producto.categoria].push(producto);
+    });
+  }
 }
+
+
+
+
+

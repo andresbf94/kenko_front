@@ -13,6 +13,10 @@ import { CartaComponent } from './views/carta/carta.component';
 import { ReservasComponent } from './views/reservas/reservas.component';
 import { InformacionComponent } from './views/informacion/informacion.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TooltipDelayComponent } from './components/tooltip-delay/tooltip-delay.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RegisterComponent } from './views/auth/register/register.component';
+import { LoginComponent } from './views/auth/login/login.component';
 
 
 @NgModule({
@@ -26,6 +30,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CartaComponent,
     ReservasComponent,
     InformacionComponent,
+    TooltipDelayComponent,
+    RegisterComponent,
+    LoginComponent,
     
   ],
   imports: [
@@ -33,10 +40,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgbModule
     
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

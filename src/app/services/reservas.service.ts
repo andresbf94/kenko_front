@@ -7,7 +7,7 @@ import { catchError, throwError, firstValueFrom } from 'rxjs';
 })
 export class ReservasService {
 
-  baseUrl = 'http://localhost:4000/api/reservas/';
+  baseUrl = 'http://localhost:4000/api/reservas';
 
   constructor(private httpClient: HttpClient) { }
 

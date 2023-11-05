@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'Lato-Light';
+    src: url(assets/fonts/Lato-Light.ttf);
+}
+
+@font-face {
+    font-family: 'Lato-Regular';
+    src: url(assets/fonts/Lato-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'BebasNeue';
+    src: url(assets/fonts/BebasNeue.ttf);
+}
+
+.roboto_font{
+    font-family: 'Lato-Regular';
+}
+
+.bebas_font{
+    font-family: 'BebasNeue';
+}
+
+.container{
+    font-family: 'Lato-Light';
+    color: rgb(225, 217, 183);
+    font-size: 18px;
+}

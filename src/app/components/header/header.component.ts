@@ -9,7 +9,6 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class HeaderComponent {
 
- 
  usuariosService = inject(UsuariosService);
 
 }

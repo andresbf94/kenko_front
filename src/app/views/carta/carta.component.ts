@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ProductosService } from 'src/app/services/productos.service';
 import { serverRoute } from 'src/app/app.component';
+import { CarritoService } from 'src/app/services/carrito.service';
+import { Producto } from 'src/app/models/producto.model';
 
 @Component({
   selector: 'app-carta',
@@ -10,19 +12,19 @@ import { serverRoute } from 'src/app/app.component';
 export class CartaComponent {
 
   serverUrl = serverRoute;
-  carrito: any = [];
   productos: any = [];
-  usuario: any = [];
   categoriasProductos: { [key: string]: any[] } = {};
+
+  carritoService = inject (CarritoService);
 
   constructor(private productoService: ProductosService) {
   }
 
   ngOnInit() {
-    this.obtenerProductos();
-    
+    this.obtenerProductos(); 
+    console.log('carrito', this.carritoService.carrito)
   }
-
+  
   obtenerProductos() {
     this.productoService.getAll().subscribe({
       next: data => {
@@ -44,6 +46,8 @@ export class CartaComponent {
       this.categoriasProductos[producto.categoria].push(producto);
     });
   }
+
+ 
 }
 
 

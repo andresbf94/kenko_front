@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { ProductosListComponent } from './components/productos/productos-list/productos-list.component';
-import { ProductosDetailComponent } from './components/productos/productos-detail/productos-detail.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './components/header/header.component';
 import { InicioComponent } from './views/inicio/inicio.component';
@@ -19,13 +17,13 @@ import { RegisterComponent } from './views/auth/register/register.component';
 import { LoginComponent } from './views/auth/login/login.component';
 import { PerfilUsuarioComponent } from './views/perfil-usuario/perfil-usuario.component';
 import { PerfilAdminComponent } from './views/perfil-admin/perfil-admin.component';
+import { CarritoComponent } from './views/carrito/carrito.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductosListComponent,
-    ProductosDetailComponent,
     HeaderComponent,
     InicioComponent,
     FooterComponent,
@@ -37,6 +35,8 @@ import { PerfilAdminComponent } from './views/perfil-admin/perfil-admin.componen
     LoginComponent,
     PerfilUsuarioComponent,
     PerfilAdminComponent,
+    CarritoComponent,
+    
     
   ],
   imports: [
@@ -45,7 +45,8 @@ import { PerfilAdminComponent } from './views/perfil-admin/perfil-admin.componen
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    NgxPaginationModule
     
   ],
   providers: [],

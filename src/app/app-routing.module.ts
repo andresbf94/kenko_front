@@ -10,6 +10,7 @@ import { LoginComponent } from './views/auth/login/login.component';
 import { PerfilUsuarioComponent } from './views/perfil-usuario/perfil-usuario.component';
 import { loginGuard } from './guards/login.guard';
 import { PerfilAdminComponent } from './views/perfil-admin/perfil-admin.component';
+import { CarritoComponent } from './views/carrito/carrito.component';
 
 const routes: Routes =[
 
@@ -20,7 +21,8 @@ const routes: Routes =[
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
   { path: 'perfil-usuario', component: PerfilUsuarioComponent, canActivate: [loginGuard]},
-  { path: 'perfil-admin', component: PerfilAdminComponent, canActivate: [loginGuard]}
+  { path: 'perfil-admin', component: PerfilAdminComponent, canActivate: [loginGuard]},
+  { path: 'carrito', component: CarritoComponent, canActivate: [loginGuard]}
   
 ] 
 

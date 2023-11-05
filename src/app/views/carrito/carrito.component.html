@@ -1,0 +1,51 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row mt-5 mb-5">
+        <h1 class="col-12 text-center bebas_font titulo">Resumen del Pedido</h1>
+    </div>
+
+    <div class="row">    
+        <table>
+            <thead>
+                <tr>
+                    <th class="text-start"><h5><b>Producto</b></h5></th>
+                    <th class="text-center"><h5><b>Cantidad</b></h5></th>
+                    <th class="text-end"><h5><b>Precio Total</b></h5></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let producto of carritoService.carrito | paginate: { itemsPerPage: 10, currentPage: p }">
+                    <td class="text-start">{{ producto.producto.nombre }}</td>
+                    <td class="text-center">{{ producto.unidades }}</td>
+                    <td class="text-end">{{ producto.producto.precio * producto.unidades }} €</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row m-3">
+        <div class="col-12">
+            <div class="text-end">
+            <b><h5><b>Total: {{ carritoService.total }} €</b></h5></b>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="offset-2 col-8 ">
+          <h5 class="text-center">Dirección de Envío</h5>
+          <input type="text" [(ngModel)]="direccionEnvio" class="form-control" placeholder="Introduce tu dirección de envío">
+        </div>
+    </div>
+
+    <div class="row mt-3 text-center">
+        <div class="offset-5 col-2 text-center">
+          <button class="btn mt-3" (click)="enviarPedido()">
+            <h5><b>Enviar</b></h5>
+          </button>
+        </div>
+    </div>
+
+    <pagination-controls *ngIf="itemsPerPage>10"  class="text-center" (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+</div>
+<app-footer class="footer"></app-footer>

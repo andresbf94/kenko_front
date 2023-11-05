@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,5 +32,17 @@ export class UsuariosService {
   
   isAuth(){
     return localStorage.getItem('token') ? true : false;
+  }
+
+  getUserID(): string | null {
+    const token = localStorage.getItem('token');
+    console.log('token', token)
+    if (token) {
+      const tokenData: any = jwtDecode(token);
+      console.log('tokendata', tokenData)
+      return tokenData.id;
+    } else {
+      return null; // Devuelve null si el token no existe
+    }
   }
 }

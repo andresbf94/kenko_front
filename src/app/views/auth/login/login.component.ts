@@ -22,7 +22,7 @@ export class LoginComponent {
 
   async onSubmit(){
     const response = await this.usuariosService.login(this.formulario.value);
-
+    console.log('p', this.formulario.value)
     if(!response.error){
         localStorage.setItem('token', response.token);
    
@@ -35,5 +35,4 @@ export class LoginComponent {
     }
   }
 
-  
 }

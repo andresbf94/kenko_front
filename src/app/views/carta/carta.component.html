@@ -1,65 +1,77 @@
 <app-header></app-header>
 <section class="container background-section">
     <div class="row mt-5 text-center">
-      <h1 class="bebas_font titulo_carta">La Carta</h1>
+        <h1 class="bebas_font titulo_carta">La Carta</h1>
     </div>
-  
+
     <div class="row">
-      <div class="col-12 col-xl-9" id="bloque_1">
-        <div class="row">
-          <!-- Angular no usa Blade, por lo que no necesitas la lógica Blade aquí -->
-          <div class="row" *ngFor="let categoria of categoriasProductos | keyvalue">
-            <h1 class="bebas_font titulo_sec mt-5">{{ categoria.key }}</h1>
-         
+        <div class="col-12 col-xl-9" id="bloque_1">
             <div class="row">
-              <div class="col-lg-4 col-md-6 p-3" *ngFor="let producto of categoria.value">
-                <div class="card carta">
-                  <img [src]="serverUrl + '/' + producto.imagen" class="card-img-top imagen_carta" [alt]="producto.nombre">
-                  <h5 class="card-title mx-4 mt-3">{{ producto.nombre }}</h5>
-                  <p class="card-text mx-4">{{ producto.descripcion }}</p>
-                  <p class="card-text mx-4">{{ producto.precio }} €</p>
-    
-                  <input type="hidden" name="nombre" [value]="producto.nombre">
-                  <input type="hidden" name="precio" [value]="producto.precio">
-                  <input type="hidden" name="idProd" [value]="producto.id">
-    
-                  <div class="card-text row">
-                    <input class="mx-4 mb-3" type="number" name="unidades" style="width: 60px;" value="0" min="0" max="9">
-                    <input class="w-25 p-1 mx-2 mb-3" name="add" type="submit" value="Añadir">
-                    <input class="w-25 p-1 mx-2 mb-3" name="delete" type="submit" value="Eliminar">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <div class="col-3 mt-5" id="carro">
-        <div class="w-100 text-center mt-4" id="pedido_div">
-          <h1 class="titulo bebas_font">Tu Pedido</h1>
-  
-          <div id="pedido">
-            <!-- Aquí, puedes repetir la lógica Blade con estructuras *ngFor -->
-            <div *ngIf="carrito && carrito.length > 0">
-                <div *ngFor="let pro of carrito">
-                    {{ pro.unidades }} {{ pro.nombre }} {{ pro.pack }}€
+                <div class="row" *ngFor="let categoria of categoriasProductos | keyvalue">
+                    <h1 class="bebas_font titulo_sec mt-5">{{ categoria.key }}</h1>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 p-3" *ngFor="let producto of categoria.value">
+                            <div class="card carta">
+                                <img [src]="serverUrl + '/' + producto.imagen" class="card-img-top imagen_carta" [alt]="producto.nombre">
+                                <h5 class="card-title mx-4 mt-3">{{ producto.nombre }}</h5>
+                                <p class="card-text mx-4">{{ producto.descripcion }}</p>
+                                <p class="card-text mx-4">{{ producto.precio }} €</p>
+
+                                <input type="hidden" name="nombre" [value]="producto.nombre">
+                                <input type="hidden" name="precio" [value]="producto.precio">
+                                <input type="hidden" name="idProd" [value]="producto.id">
+
+                                <div class="card-text row">
+                                    <input class="mx-4 mb-3" type="number" name="unidades" style="width: 60px" value="0" min="0" max="9" #unidades>
+                                    <button class="w-25 p-1 mx-2 mb-3" name="add" (click)="carritoService.agregar(producto, unidades.valueAsNumber)">
+                                        Añadir
+                                    </button>
+                                    <button class="w-25 p-1 mx-2 mb-3" name="delete" (click)="carritoService.eliminar(producto, unidades.valueAsNumber)">
+                                        Eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <button class="boton">
-              <a class="pagar" href="pedido">Pagar</a>
-            </button>
-          </div>
-  
-          <div id="astro" class="astronauta d-flex justify-content-center" *ngIf="!(carrito && carrito.length > 0)">
-            <img src="../../../assets/images/astronaut.svg" alt="imagen de un astronauta" class="img-fluid">
-          </div>
-          <div id="aviso" *ngIf="!(carrito && carrito.length > 0)">
-            <p *ngIf="usuario">Bienvenido {{ usuario}}.</p>
-            <p>Todavía no has añadido ningún producto. Cuando lo hagas, ¡verás los productos aquí!</p>
-          </div>
         </div>
-      </div>
+
+        <div class="col-3 mt-5" id="carro">
+            <div class="w-100 text-center mt-4" id="pedido_div">
+                <h1 class="titulo bebas_font mb-4 mt-3">Tu Pedido</h1>
+
+             
+                    
+                    <div *ngIf="carritoService.carrito.length > 0">
+                        <div *ngFor="let producto of carritoService.carrito">
+                          <table class="w-100">
+                            <tr>
+                              <td class="col-3 text-start">{{ producto.unidades }}</td>
+                              <td class="col-6 text-start">{{ producto.producto.nombre }}</td>
+                              <td class="col-3 text-end">{{ producto.unidades * producto.producto.precio }}€</td>
+                            </tr>
+                          </table>
+                              
+                        </div>
+                        <div *ngIf="carritoService.total>0">
+                          <h4 class="text-end mt-4 mb-4">Total: {{carritoService.total}} €</h4>
+                        </div>
+                        <button routerLink="/carrito">
+                            Pagar
+                        </button>
+                    </div>
+          
+
+                <div id="astro" class="astronauta d-flex justify-content-center" *ngIf="carritoService.carrito.length === 0">
+                    <img src="../../../assets/images/astronaut.svg" alt="imagen de un astronauta" class="img-fluid">
+                </div>
+                <div id="aviso" *ngIf="carritoService.carrito.length === 0">
+                    <p *ngIf="">Bienvenido.</p>
+                    <p>Todavía no has añadido ningún producto. Cuando lo hagas, ¡verás los productos aquí!</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
-  <app-footer></app-footer>
+</section>
+<app-footer></app-footer>

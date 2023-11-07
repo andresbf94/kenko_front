@@ -65,3 +65,11 @@ body{
 .collapse:not(.show) {
     justify-content: center;
 }
+
+.miBoton{
+    border: none;
+    text-decoration: none;
+}
+.dropdown-toggle::after {
+    display: none;
+}

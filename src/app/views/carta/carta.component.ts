@@ -2,7 +2,11 @@ import { Component, inject } from '@angular/core';
 import { ProductosService } from 'src/app/services/productos.service';
 import { serverRoute } from 'src/app/app.component';
 import { CarritoService } from 'src/app/services/carrito.service';
-import { Producto } from 'src/app/models/producto.model';
+
+interface Producto {
+  
+  unidades: number;
+}
 
 @Component({
   selector: 'app-carta',
@@ -14,6 +18,7 @@ export class CartaComponent {
   serverUrl = serverRoute;
   productos: any = [];
   categoriasProductos: { [key: string]: any[] } = {};
+  unidades:number = 0;
 
   carritoService = inject (CarritoService);
 
@@ -47,10 +52,16 @@ export class CartaComponent {
     });
   }
 
- 
+  sumar(producto: Producto) {
+    if (producto.unidades < 9) {
+      producto.unidades++;
+    }
+  }
+
+  restar(producto: Producto) {
+    if (producto.unidades > 0) {
+      producto.unidades--;
+    }
+  }
 }
-
-
-
-
 

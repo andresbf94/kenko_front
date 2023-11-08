@@ -21,14 +21,32 @@
                                 <input type="hidden" name="precio" [value]="producto.precio">
                                 <input type="hidden" name="idProd" [value]="producto.id">
 
-                                <div class="card-text row">
-                                    <input class="mx-4 mb-3" type="number" name="unidades" style="width: 60px" value="0" min="0" max="9" #unidades>
-                                    <button class="w-25 p-1 mx-2 mb-3" name="add" (click)="carritoService.agregar(producto, unidades.valueAsNumber)">
-                                        Añadir
-                                    </button>
-                                    <button class="w-25 p-1 mx-2 mb-3" name="delete" (click)="carritoService.eliminar(producto, unidades.valueAsNumber)">
+                                <div class="card-text row mt-1 mb-2 justify-content-center align-items-center">
+                                  
+                                    <div class="col-6 textoCarta d-flex text-center">
+                                        <div class="col-6 textoCarta d-flex text-center">
+                                            <button class="btnRestar btn btn-dark" (click)="restar(producto)">
+                                                <b class="simboloRestar">-</b>
+                                            </button>
+                                            
+                                            <input class="unidades bg-dark mx-1" value="0"  min="0" max="9" [id]="'unidades_' + producto._id" disabled #unidades>
+                                            
+                                            <button class="btnSumar btn btn-dark" (click)="sumar(producto)">
+                                                <b>+</b>
+                                            </button> 
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-6 text-start mb-1 text-center">
+                                        <button class="btnAnadir btn btn-dark" (click)="carritoService.agregar(producto, unidades.valueAsNumber)">
+                                            Añadir
+                                        </button>
+                                    </div>
+                                    
+                                    <!--
+                                    <button class="w-25 p-1 mx-2 mb-3" (click)="carritoService.eliminar(producto, unidades.valueAsNumber)">
                                         Eliminar
-                                    </button>
+                                    </button>-->
                                 </div>
                             </div>
                         </div>

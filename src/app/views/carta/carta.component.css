@@ -36,10 +36,54 @@ section{
     padding: 20px;
 }
 
+.btnSumar{
+    width: 34px;
+    height: 34px;
+    border-radius: 17px;
+    border: 2px solid  rgb(225, 217, 183);
+    color: rgb(225, 217, 183);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.btnRestar {
+    width: 34px;
+    height: 34px;
+    border-radius: 17px;
+    border: 2px solid  rgb(225, 217, 183);
+    color: rgb(225, 217, 183);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+}
+
+.unidades{
+    width: 30px;
+    text-align: center;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+    color:rgb(225, 217, 183);
+    margin-bottom: 4px;   
+}
+
+.btnAnadir{
+    border: 2px solid  rgb(225, 217, 183);
+    color:rgb(225, 217, 183);
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 25px;
+    
+}
+
 @media (width < 1200px) {
     #carro{
         display: none;
     }
 }
+
 
 

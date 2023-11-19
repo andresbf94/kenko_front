@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { firstValueFrom } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 
@@ -18,8 +18,8 @@ export class UsuariosService {
       this.http.post<any>(`${this.baseUrl}/register`, formValue)
     )
   }
+  
   login(formValue:any ){
-
     return firstValueFrom(
       this.http.post<any>(`${this.baseUrl}/login`, formValue)
     )
@@ -34,7 +34,22 @@ export class UsuariosService {
     return localStorage.getItem('token') ? true : false;
   }
 
-  getUserID(): string | null {
+  getUserById(id:any, token:any): Observable<any> {
+    // Configura el encabezado con el token de autorización
+    const headers = new HttpHeaders({
+      'Authorization': token, 
+    })
+    // Agrega el encabezado a la solicitud HTTP
+    const options = {headers: headers};
+     // Realiza la solicitud GET con el encabezado de autorización
+    return this.http.get(`${this.baseUrl}/${id}`, options)
+  }
+  
+  getToken():any {
+    return localStorage.getItem('token');
+  }
+
+  getUserID(): any {
     const token = localStorage.getItem('token');
     console.log('token', token)
     if (token) {

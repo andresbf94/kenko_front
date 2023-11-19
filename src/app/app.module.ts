@@ -21,6 +21,8 @@ import { CarritoComponent } from './views/carrito/carrito.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,9 +37,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     LoginComponent,
     PerfilUsuarioComponent,
     PerfilAdminComponent,
-    CarritoComponent,
-    
-    
+    CarritoComponent,    
   ],
   imports: [
     BrowserModule,

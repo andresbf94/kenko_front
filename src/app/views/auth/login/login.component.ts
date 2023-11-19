@@ -12,6 +12,7 @@ export class LoginComponent {
 
   formulario: FormGroup;
   pantallaPequeña = false;
+  responseError: string = '';
 
   constructor(fb:FormBuilder, private usuariosService:UsuariosService, private router:Router){
     this.formulario = fb.group({
@@ -21,8 +22,14 @@ export class LoginComponent {
   }
 
   async onSubmit(){
+
+    if(this.formulario.invalid){
+      this.marcarCamposComoTouched();
+      return;
+    }
+    
     const response = await this.usuariosService.login(this.formulario.value);
-    console.log('p', this.formulario.value)
+  
     if(!response.error){
         localStorage.setItem('token', response.token);
    
@@ -30,9 +37,16 @@ export class LoginComponent {
           this.router.navigate(['/perfil-usuario']);
         } else {
           this.router.navigate(['/perfil-admin']);
-        }
-        
+        }  
+    } else {
+      this.responseError = 'Usuario o contraseña incorrectos'; // O utiliza el mensaje de error proporcionado por tu servicio.
     }
   }
 
+  private marcarCamposComoTouched(){
+    Object.values(this.formulario.controls).forEach( control => {
+      control.markAllAsTouched();
+    })
+  }
+  
 }

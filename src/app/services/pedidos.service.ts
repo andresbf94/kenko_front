@@ -17,6 +17,17 @@ export class PedidosService {
     );  
   }
   
+  getPedidos(){
+    return firstValueFrom(
+      this.httpClient.get<any>(this.baseUrl)
+    );
+  }
+
+  getPedidoById(id:any){
+    return firstValueFrom(
+      this.httpClient.get<any>(`${this.baseUrl}/${id}`)
+    );
+  }
 
 
 }

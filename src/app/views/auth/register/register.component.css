@@ -17,7 +17,7 @@
 }
 
 .content {
-    width: 450px; /* Ancho deseado */
+    width: 550px; /* Ancho deseado */
     height: auto; /* Altura deseada */
     padding: 20px; /* Opcional: Agregar relleno al contenido */
   }

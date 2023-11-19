@@ -16,37 +16,19 @@
                                 <h5 class="card-title mx-4 mt-3">{{ producto.nombre }}</h5>
                                 <p class="card-text mx-4">{{ producto.descripcion }}</p>
                                 <p class="card-text mx-4">{{ producto.precio }} €</p>
-
-                                <input type="hidden" name="nombre" [value]="producto.nombre">
-                                <input type="hidden" name="precio" [value]="producto.precio">
-                                <input type="hidden" name="idProd" [value]="producto.id">
-
-                                <div class="card-text row mt-1 mb-2 justify-content-center align-items-center">
+                                <div class="card-textv d-inline-flex text-center mb-3">
                                   
-                                    <div class="col-6 textoCarta d-flex text-center">
-                                        <div class="col-6 textoCarta d-flex text-center">
-                                            <button class="btnRestar btn btn-dark" (click)="restar(producto)">
-                                                <b class="simboloRestar">-</b>
-                                            </button>
-                                            
-                                            <input class="unidades bg-dark mx-1" value="0"  min="0" max="9" [id]="'unidades_' + producto._id" disabled #unidades>
-                                            
-                                            <button class="btnSumar btn btn-dark" (click)="sumar(producto)">
-                                                <b>+</b>
-                                            </button> 
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="col-6 text-start mb-1 text-center">
-                                        <button class="btnAnadir btn btn-dark" (click)="carritoService.agregar(producto, unidades.valueAsNumber)">
+                                    <div class="col-6">
+                                        <button class="btnAnadir btn btn-dark" (click)="carritoService.agregar(producto, 1)">
                                             Añadir
                                         </button>
                                     </div>
-                                    
-                                    <!--
-                                    <button class="w-25 p-1 mx-2 mb-3" (click)="carritoService.eliminar(producto, unidades.valueAsNumber)">
-                                        Eliminar
-                                    </button>-->
+                                     
+                                    <div class="col-6">
+                                        <button class="btnAnadir btn btn-dark" (click)="carritoService.eliminar(producto, 1)">
+                                            Eliminar
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +57,7 @@
                         <div *ngIf="carritoService.total>0">
                           <h4 class="text-end mt-4 mb-4">Total: {{carritoService.total}} €</h4>
                         </div>
-                        <button routerLink="/carrito">
+                        <button class="btnAnadir btn btn-dark" routerLink="/carrito">
                             Pagar
                         </button>
                     </div>

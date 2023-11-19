@@ -18,7 +18,7 @@ export class CartaComponent {
   serverUrl = serverRoute;
   productos: any = [];
   categoriasProductos: { [key: string]: any[] } = {};
-  unidades:number = 0;
+  ud:number = 0;
 
   carritoService = inject (CarritoService);
 
@@ -52,16 +52,14 @@ export class CartaComponent {
     });
   }
 
-  sumar(producto: Producto) {
-    if (producto.unidades < 9) {
-      producto.unidades++;
+  restar() {
+    if(this.ud>0){
+      this.ud--;
     }
   }
 
-  restar(producto: Producto) {
-    if (producto.unidades > 0) {
-      producto.unidades--;
-    }
+  sumar() {
+    this.ud++;
   }
 }
 

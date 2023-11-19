@@ -10,6 +10,6 @@ import { CarritoService } from 'src/app/services/carrito.service';
 })
 export class HeaderComponent {
 
- usuariosService = inject(UsuariosService);
+  usuariosService = inject(UsuariosService);
   carritoService = inject(CarritoService);
 }

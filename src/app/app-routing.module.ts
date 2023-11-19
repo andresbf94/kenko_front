@@ -21,9 +21,9 @@ const routes: Routes =[
   { path: 'informacion', component: InformacionComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'perfil-usuario', component: PerfilUsuarioComponent, canActivate: [loginGuard]},
-  { path: 'perfil-admin', component: PerfilAdminComponent, canActivate: [loginGuard]},
-  { path: 'carrito', component: CarritoComponent, canActivate: [loginGuard, carritoGuard], }
+  { path: 'perfil-usuario', component: PerfilUsuarioComponent,/* canActivate: [loginGuard]*/},
+  { path: 'perfil-admin', component: PerfilAdminComponent, /*canActivate: [loginGuard]*/},
+  { path: 'carrito', component: CarritoComponent,/* canActivate: [loginGuard, carritoGuard],*/ }
   
 ] 
 

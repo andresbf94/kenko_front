@@ -19,6 +19,14 @@
     background-color: rgb(225, 217, 183,0.1);
 }
 
+.imagenConfirmacion{
+    width: 300px;
+    height: auto;
+    border-radius: 50px;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
 @media (width < 1200px) {
     .container{
         width: 100%;
@@ -32,3 +40,4 @@
         bottom: auto;
         width: auto;
 }}
+

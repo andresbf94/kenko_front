@@ -1,77 +1,100 @@
 <app-header></app-header>  <!--HEADER-->
 
     <section class="bg-reservas">
-        <div class="container">
+        <div class="container" *ngIf="!reservaRealizada">
             <h1 class="row justify-content-center mb-4 mt-5 bebas_font">RESERVAR</h1>
 
-            <form class="offset-1 col-10 offset-lg-3 col-lg-6 form_reserva" [formGroup]="formulario" (ngSubmit) = "onSubmit()">
-            
-
+            <form class="offset-1 col-10 offset-lg-3 col-lg-6 form_reserva" [formGroup]="formulario" (ngSubmit)="onSubmit()">
                 <div class="row">
-                    <div class="mb-3 col-6 col-lg-6">
-                        <label for="nombre"  class="form-label">Nombre</label>
-                        <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Tu nombre" required  formControlName="nombre">
-                        <app-tooltip-delay [hidden]="nombre.valid || nombre.pristine"></app-tooltip-delay>
+                  <div class="mb-3 col-6 col-lg-6">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Tu nombre" required formControlName="nombre">
+                    
+                    <div *ngIf="formulario.get('nombre')?.touched && formulario.get('nombre')?.invalid" class="text-danger mx-1">
+                      <div *ngIf="formulario.get('nombre')?.hasError('required')">El nombre es obligatorio</div>
+                      <div *ngIf="formulario.get('nombre')?.hasError('minlength')">El nombre debe tener al menos 3 caracteres</div>
                     </div>
-
-                    <div class="mb-3 col-6 col-lg-6">
-                        <label for="email"  class="form-label">Correo electrónico</label>
-                        <input type="email" name="email" class="form-control" id="email" placeholder="Tu correo electrónico" required formControlName="email">
-                        <app-tooltip-delay [hidden]="email.valid || email.pristine"></app-tooltip-delay>
+                  </div>
+              
+                  <div class="mb-3 col-6 col-lg-6">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Tu correo electrónico" required formControlName="email">
+                    
+                    <div *ngIf="formulario.get('email')?.touched && formulario.get('email')?.invalid" class="text-danger mx-1">
+                      <div *ngIf="formulario.get('email')?.hasError('required')">El correo electrónico es obligatorio</div>
+                      <div *ngIf="formulario.get('email')?.hasError('email')">Ingresa un correo electrónico válido</div>
                     </div>
+                  </div>
                 </div>
-
+              
                 <div class="row">
-                    <div class="mb-3 col-6 col-lg-4">
-                        <label for="numPer"  class="form-label">Número de personas</label>
-                        <input type="number" name="numPer" class="form-control" id="numPersonas" placeholder="Número de personas" min="1" max="10" required formControlName="numPer">
-                        <app-tooltip-delay [hidden]="numPer.valid || numPer.pristine"></app-tooltip-delay> 
+                  <div class="mb-3 col-6 col-lg-4">
+                    <label for="numPer" class="form-label">Número de personas</label>
+                    <input type="number" name="numPer" class="form-control" id="numPersonas" placeholder="Número de personas" min="1" max="10" required formControlName="numPer">
+                    
+                    <div *ngIf="formulario.get('numPer')?.touched && formulario.get('numPer')?.invalid" class="text-danger mx-1">
+                      <div *ngIf="formulario.get('numPer')?.hasError('required')">El número de personas es obligatorio</div>
                     </div>
-                    <div class="mb-3 col-6 col-lg-4">
-                        <label for="hora"  class="form-label">Hora</label>
-                        <select type="time" name="hora" class="form-control" id="hora" required formControlName="hora">
-                            <option value="13:00">13:00</option>
-                            <option value="15:00">15:00</option>
-                            <option value="21:00">21:00</option>
-                            <option value="23:00">23:00</option> 
-                        </select>
-                        <app-tooltip-delay [hidden]="hora.valid || hora.pristine"></app-tooltip-delay>
+                  </div>
+              
+                  <div class="mb-3 col-6 col-lg-4">
+                    <label for="hora" class="form-label">Hora</label>
+                    <select type="time" name="hora" class="form-control" id="hora" required formControlName="hora">
+                        <option value="13:00">13:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="21:00">21:00</option>
+                        <option value="23:00">23:00</option> 
+                    </select>
+                    
+                    <div *ngIf="formulario.get('hora')?.touched && formulario.get('hora')?.invalid" class="text-danger mx-1">
+                      <div *ngIf="formulario.get('hora')?.hasError('required')">La hora es obligatoria</div>
                     </div>
-                    <div class="mb-3 col-lg-4">
-                        <label for="fecha"  class="form-label">Fecha</label>
-                        <input type="date" name="fecha" class="form-control" id="fecha"  min="" required formControlName="fecha">
-                        <app-tooltip-delay [hidden]="fecha.valid || fecha.pristine"></app-tooltip-delay>
+                  </div>
+              
+                  <div class="mb-3 col-lg-4">
+                    <label for="fecha" class="form-label">Fecha</label>
+                    <input type="date" name="fecha" class="form-control" id="fecha" min="" required formControlName="fecha">
+                    
+                    <div *ngIf="formulario.get('fecha')?.touched && formulario.get('fecha')?.invalid" class="text-danger mx-1">
+                      <div *ngIf="formulario.get('fecha')?.hasError('required')">La fecha es obligatoria</div>
                     </div>
+                  </div>
                 </div>
-
+              
                 <div class="row">
-                    <div class="mb-3">
-                        <label for="observaciones" class="form-label">Observaciones</label>
-                        <textarea class="form-control" name="observaciones" id="observaciones" rows="3" placeholder="Tus observaciones" formControlName="observaciones"></textarea>
-                    </div>
+                  <div class="mb-3">
+                    <label for="observaciones" class="form-label">Observaciones</label>
+                    <textarea class="form-control" name="observaciones" id="observaciones" rows="3" placeholder="Tus observaciones" formControlName="observaciones"></textarea>
+                  </div>
                 </div>
-                
+              
                 <div class="row">
-                    <div class="col-2">
-                        <button class="col-2" type="submit" class="btn btn-dark border-light text-center mb-5" name="enviar" [disabled]="formulario.invalid" (click)="eliminarMensaje()">
-                            <b>Enviar</b>
-                        </button>   
-                    </div>                
+                  <div class="col-2">
+                    <button type="submit" class="btn btn-dark border-light text-center mb-5" name="enviar" [disabled]="formulario.invalid" (click)="eliminarMensaje()">
+                      <b>Enviar</b>
+                    </button>   
+                  </div>                
                 </div>
-                
+              
                 <div class="text-center">
-                    <div *ngIf="mensaje==='Reserva realizada con exito'">
-                        <div class="alert alert-success d-inline-block " role="alert">
-                            <i class="bi bi-check-circle"></i> &nbsp; {{mensaje}}
-                        </div>
-                    </div>                    
-                    <div *ngIf="mensaje==='Lo sentimos, el aforo maximo ha sido alcanzado'">
-                        <div class="alert alert-danger d-inline-block " role="alert">
-                            <i class="bi bi-exclamation-triangle"> </i>&nbsp; {{mensaje}} 
-                        </div>  
+                  <div *ngIf="formulario.valid && mensaje==='Reserva realizada con exito'">
+                    <div class="alert alert-success d-inline-block " role="alert">
+                      <i class="bi bi-check-circle"></i> &nbsp; {{mensaje}}
                     </div>
-                </div>      
-            </form>            
+                  </div>                    
+                  <div *ngIf="formulario.valid && mensaje==='Lo sentimos, el aforo maximo ha sido alcanzado'">
+                    <div class="alert alert-danger d-inline-block " role="alert">
+                      <i class="bi bi-exclamation-triangle"></i>&nbsp; {{mensaje}} 
+                    </div>  
+                  </div>
+                </div>
+              </form>            
+        </div>
+
+        <div *ngIf="reservaRealizada" class="text-center">
+            <h2 class="mt-5" style="margin-top: 100px;">¡Reserva realizada con éxito!</h2>
+            <img class="mt-5" src="../../../assets/images/enviar-datos.png" style="height: 100px; width: auto;">
+            <p class="mt-5">Se le ha enviado un correo con los detalles de la reserva</p>
         </div>
     </section>
 

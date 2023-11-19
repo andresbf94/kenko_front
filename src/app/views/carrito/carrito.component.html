@@ -1,6 +1,6 @@
 <app-header></app-header>
-<ng-container *ngIf=""></ng-container>
-<div class="container">
+
+<div class="container" *ngIf="!pedidoEnviado">
     <div class="row mt-5 mb-5">
         <h1 class="col-12 text-center bebas_font titulo">Resumen del Pedido</h1>
     </div>
@@ -40,8 +40,15 @@
             <h5><b>Comprar</b></h5>
           </button>
         </div>
-    </div>
-
-    
+    </div>      
 </div>
+
+<div class="container text-center" *ngIf="pedidoEnviado">
+    <h2 class="mt-5">¡Pedido realizado con éxito!</h2>
+    <img class="imagenConfirmacion" src="../../../assets/images/Online_Shoping_29.jpg">
+    <p class="mt-3">Tu pedido ha sido recibido y está siendo procesado.</p>
+    
+
+</div>
+
 <app-footer class="footer"></app-footer>

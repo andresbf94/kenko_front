@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { MailService } from 'src/app/services/mail.service';
 import { ReservasService } from 'src/app/services/reservas.service';
 
 @Component({
@@ -11,25 +12,9 @@ export class ReservasComponent {
 
   formulario: FormGroup;
   mensaje: string = '';
+  reservaRealizada=  false;
 
-  get nombre (){
-    return this.formulario.get('nombre') as FormControl;
-  }
-  get email (){
-    return this.formulario.get('email') as FormControl;
-  }
-  get numPer (){
-    return this.formulario.get('numPer') as FormControl;
-  }
-  get hora (){
-    return this.formulario.get('hora') as FormControl;
-  }
-  get fecha (){
-    return this.formulario.get('fecha') as FormControl;
-  }
-
-
-  constructor( private reservasService:ReservasService, fb:FormBuilder){
+  constructor( private reservasService:ReservasService, fb:FormBuilder, private mailService: MailService){
     this.formulario = fb.group({
       nombre: ['', [Validators.required]],
       email: ['',[Validators.required, Validators.email]],
@@ -43,9 +28,13 @@ export class ReservasComponent {
   async onSubmit() {
     if(this.formulario.valid){
       try {
-        const response = await this.reservasService.create(this.formulario.value)
-        console.log(response)
-        this.mensaje = 'Reserva realizada con exito';       
+        const response = await this.reservasService.create(this.formulario.value);
+        console.log('response', response)
+        if(response){
+          this.mailService.sendConfimationMail(this.formulario.value);
+          this.reservaRealizada = true;
+        }
+            
       } catch (error) {
         this.mensaje = 'Lo sentimos, el aforo maximo ha sido alcanzado';
       }

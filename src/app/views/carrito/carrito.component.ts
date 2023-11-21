@@ -27,21 +27,19 @@ export class CarritoComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
   // Obtiene los datos del usuario autenticado y los envia junto con los del carrito para la creacion de un pedido 
   async enviarPedido() {
     try {
       const userData = await this.usuariosService.getUserById(this.idUsuario, this.tokenUsuario).toPromise();
-      console.log('userData', userData);
 
       this.pedido = {
         user_id: userData._id,
         direccion: userData.direccion,
-        productos: this.carritoService.carrito  // No necesitas envolverlo en un array
+        productos: this.carritoService.carrito  
       };
 
-      console.log('pedido', this.pedido);
       await this.pedidosService.enviarPedido(this.pedido);
+      this.carritoService.carrito = []; // Pongo a cero el carrito
       this.pedidoEnviado = true;
     } catch (error) {
       console.error('Error al obtener los datos del usuario o enviar el pedido', error);

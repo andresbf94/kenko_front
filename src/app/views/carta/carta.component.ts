@@ -27,7 +27,7 @@ export class CartaComponent {
 
   ngOnInit() {
     this.obtenerProductos(); 
-    console.log('carrito', this.carritoService.carrito)
+    
   }
   
   obtenerProductos() {

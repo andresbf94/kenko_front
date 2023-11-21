@@ -1,8 +1,40 @@
 <app-header></app-header>
 <div class="container">
-    <div class="col-6 pedidos"></div>
-    <div class="col-6 perfil">
+    <div class="row contenido">
+
+        <div class="col-6 pedidos">
+            <div>
+                <h1 class="bebas_font mb-4 titulos">Mis Pedidos</h1>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Dirección de Entrega</th>
+                        <th>Productos</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let pedido of pedidos">
+                        <td>{{ formatDate(pedido.createdAt) }}</td>
+                        <td>{{ pedido.direccion }}</td>
+                        <td>
+                        <ul>
+                            <li *ngFor="let producto of pedido.productos">
+                            {{ producto.producto.nombre }} - {{ producto.unidades }} unidades
+                            </li>
+                        </ul>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-6 perfil">
         
+        </div>
+
     </div>
+    
 </div>
 <app-footer></app-footer>

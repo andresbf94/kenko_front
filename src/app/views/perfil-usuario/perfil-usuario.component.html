@@ -31,10 +31,76 @@
         </div>
 
         <div class="col-6 perfil">
-        
-        </div>
-
-    </div>
+            
+            <div class="contenedor offset-4 col-4">
     
+                <div>
+                    <h1 class="bebas_font mb-4 titulos ">Perfil</h1>
+                </div>
+
+                <form [formGroup]="formulario" (ngSubmit)="guardarCambios()">
+                    <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" formControlName="nombre" class="form-control" [placeholder]="usuario.nombre" [readonly]="!editando" [ngClass]="{'cuadros': !editando}"> 
+                    <div *ngIf="formulario.get('nombre')?.touched && formulario.get('nombre')?.invalid" class="text-danger mx-1">
+                        <div *ngIf="formulario.get('nombre')?.hasError('required')">El nombre es obligatorio</div>
+                        <div *ngIf="formulario.get('nombre')?.hasError('minlength')">El nombre debe tener al menos 3 caracteres</div>
+                    </div>
+                    </div>
+            
+                    <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" formControlName="email" class="form-control"  [placeholder]="usuario.email" [readonly]="!editando" [ngClass]="{'cuadros': !editando}">
+                    <div *ngIf="formulario.get('email')?.touched && formulario.get('email')?.invalid" class="text-danger mx-1">
+                        <div *ngIf="formulario.get('email')?.hasError('required')">El email es obligatorio</div>
+                        <div *ngIf="formulario.get('email')?.hasError('email')">El email no tiene un formato válido</div>
+                    </div>
+                    </div>
+            
+                    <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" formControlName="password" class="form-control"  [placeholder]="usuario.password" [readonly]="!editando" [ngClass]="{'cuadros': !editando}">
+                    <div *ngIf="formulario.get('password')?.touched && formulario.get('password')?.invalid" class="text-danger mx-1">
+                        <div *ngIf="formulario.get('password')?.hasError('required')">La contraseña es obligatoria</div>
+                        <div *ngIf="formulario.get('password')?.hasError('minlength')">La contraseña debe incluir al menos 8 caracteres</div>
+                    </div>
+                    </div>
+            
+                    <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="text" formControlName="telefono" minlength="9" class="form-control"  [placeholder]="usuario.telefono" [readonly]="!editando" [ngClass]="{'cuadros': !editando}">
+                    <div *ngIf="formulario.get('telefono')?.touched && formulario.get('telefono')?.invalid" class="text-danger mx-1">
+                        <div *ngIf="formulario.get('telefono')?.hasError('minlength')">El teléfono debe tener al menos 9 caracteres</div>
+                        <div *ngIf="formulario.get('telefono')?.hasError('pattern')">El teléfono solo puede contener números</div>
+                    </div>
+                    </div>
+            
+                    <div class="form-group">
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" formControlName="direccion" class="form-control"  [placeholder]="usuario.direccion" [readonly]="!editando" [ngClass]="{'cuadros': !editando}">
+                    <div *ngIf="formulario.get('direccion')?.touched && formulario.get('direccion')?.invalid" class="text-danger mx-1">
+                        <div *ngIf="formulario.get('direccion')?.hasError('required')">La dirección es obligatoria</div>
+                    </div>
+                    </div>
+            
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+
+                    <div *ngIf="!editando" >
+                        <button (click)="habilitarEdicion()" class="btn btn-dark border"> 
+                            <b>Editar</b>
+                        </button>
+                    </div>
+                    <div *ngIf="editando">
+                        <button type="submit" class="btn btn-dark border">
+                            <b>Guardar Cambios</b>
+                        </button>
+                    </div>
+                    
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>   
 </div>
 <app-footer></app-footer>

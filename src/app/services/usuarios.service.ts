@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, firstValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import { Usuario } from '../models/usuario.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,8 +35,10 @@ export class UsuariosService {
     return localStorage.getItem('token') ? true : false;
   }
 
-  getUserById(id:any, token:any): Observable<any> {
-    // Configura el encabezado con el token de autorización
+  getUserById(): Observable<any> {
+    const token = this.getToken();
+    const id = this.getUserID();
+
     const headers = new HttpHeaders({
       'Authorization': token, 
     })
@@ -55,9 +58,33 @@ export class UsuariosService {
     if (token) {
       const tokenData: any = jwtDecode(token);
       console.log('tokendata', tokenData)
+      
       return tokenData.id;
     } else {
       return null; // Devuelve null si el token no existe
     }
+  }
+
+  updateUser(formValue:any):any {
+    const token = this.getToken();
+    const id = this.getUserID();
+    
+    const headers = new HttpHeaders({
+      'Authorization': token, 
+    })
+    // Agrega el encabezado a la solicitud HTTP
+    const options = {headers: headers};
+  
+    let usuario = {
+      nombre: formValue.nombre,  
+      email: formValue.email,
+      password: formValue.password,
+      direccion: formValue.direccion,
+      telefono: formValue.telefono,
+    } 
+    console.log('usuarioModificadoService', usuario);
+    return firstValueFrom(
+      this.http.put<any>(`${this.baseUrl}/${id}`, usuario, options)
+    )
   }
 }

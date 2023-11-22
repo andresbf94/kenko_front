@@ -30,7 +30,7 @@ export class CarritoComponent implements OnInit {
   // Obtiene los datos del usuario autenticado y los envia junto con los del carrito para la creacion de un pedido 
   async enviarPedido() {
     try {
-      const userData = await this.usuariosService.getUserById(this.idUsuario, this.tokenUsuario).toPromise();
+      const userData = await this.usuariosService.getUserById().toPromise();
 
       this.pedido = {
         user_id: userData._id,

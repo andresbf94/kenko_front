@@ -8,10 +8,11 @@ import { InformacionComponent } from './views/informacion/informacion.component'
 import { RegisterComponent } from './views/auth/register/register.component';
 import { LoginComponent } from './views/auth/login/login.component';
 import { PerfilUsuarioComponent } from './views/perfil-usuario/perfil-usuario.component';
-import { loginGuard } from './guards/login.guard';
+import { usuarioGuard } from './guards/usuario.guard';
 import { PerfilAdminComponent } from './views/perfil-admin/perfil-admin.component';
 import { CarritoComponent } from './views/carrito/carrito.component';
 import { carritoGuard } from './guards/carrito.guard';
+import { adminGuard } from './guards/admin.guard';
 
 const routes: Routes =[
 
@@ -21,9 +22,9 @@ const routes: Routes =[
   { path: 'informacion', component: InformacionComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'perfil-usuario', component: PerfilUsuarioComponent, canActivate: [loginGuard]},
-  { path: 'perfil-admin', component: PerfilAdminComponent, canActivate: [loginGuard]},
-  { path: 'carrito', component: CarritoComponent, canActivate: [loginGuard, carritoGuard]}
+  { path: 'perfil-usuario', component: PerfilUsuarioComponent, canActivate: [usuarioGuard]},
+  { path: 'perfil-admin', component: PerfilAdminComponent, canActivate: [adminGuard]},
+  { path: 'carrito', component: CarritoComponent, canActivate: [usuarioGuard, carritoGuard]}
   
 ] 
 
@@ -37,4 +38,5 @@ const routes: Routes =[
     RouterModule
   ]
 })
+
 export class AppRoutingModule { }

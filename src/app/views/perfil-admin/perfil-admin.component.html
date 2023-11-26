@@ -1,1 +1,33 @@
-<p>perfil-admin works!</p>
+<app-header></app-header>
+<div class="container">
+    <div class="row contenido">
+      <div class="col-12">
+        <h1 class="bebas_font mb-4 titulos">Lista de Pedidos</h1>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID del Pedido</th>
+              <th>Dirección de Entrega</th>
+              <th>Productos</th>
+              <th>ID del Usuario</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pedido of pedidos">
+              <td>{{ pedido._id }}</td>
+              <td>{{ pedido.direccion }}</td>
+              <td>
+                <ul>
+                  <li *ngFor="let producto of pedido.productos">
+                    {{ producto.producto.nombre }} - {{ producto.unidades }} unidades
+                  </li>
+                </ul>
+              </td>
+              <td><td>{{ (getUserById(pedido.user_id) | async) || 'Usuario no encontrado' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<app-footer></app-footer>

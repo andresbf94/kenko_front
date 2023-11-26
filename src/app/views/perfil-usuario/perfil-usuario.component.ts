@@ -28,6 +28,7 @@ export class PerfilUsuarioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.inicializarFormulario();
     this.getUserData();
   }
 
@@ -54,10 +55,14 @@ export class PerfilUsuarioComponent implements OnInit {
     });
   }
 
-  habilitarEdicion() {
-    this.editando = true;
+  edicion() {
+    if(this.editando=== true){
+      this.editando = false;
+      return
+    }
+    this.editando =true;
   }
-
+  
   cancelarEdicion() {
     this.editando = false;
     this.nuevaContrasena = ''; // Limpia el campo de nueva contraseña

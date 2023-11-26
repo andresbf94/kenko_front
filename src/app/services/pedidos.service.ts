@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { Observable, catchError, firstValueFrom, throwError } from 'rxjs';
 import { UsuariosService } from './usuarios.service';
 
 @Injectable({
@@ -18,12 +18,14 @@ export class PedidosService {
     );  
   }
   
-  getPedidos(){
-    return firstValueFrom(
-      this.httpClient.get<any>(this.baseUrl)
+  getPedidos(): Observable<any> {
+    return this.httpClient.get(this.baseUrl).pipe(
+      catchError((error) => {
+        console.error('Error al obtener pedidos:', error);
+        return throwError(error);
+      })
     );
   }
-
   getPedidoById(id:any){
     return firstValueFrom(
       this.httpClient.get<any>(`${this.baseUrl}/${id}`)

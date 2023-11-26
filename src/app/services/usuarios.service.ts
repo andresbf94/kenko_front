@@ -14,6 +14,10 @@ export class UsuariosService {
 
   constructor(private http: HttpClient, private router:Router) { }
 
+  getUsers(): Observable<any> {
+    return this.http.get(this.baseUrl);
+  }
+
   register(formValue:any ){
     return firstValueFrom(
       this.http.post<any>(`${this.baseUrl}/register`, formValue)
@@ -47,7 +51,7 @@ export class UsuariosService {
      // Realiza la solicitud GET con el encabezado de autorización
     return this.http.get(`${this.baseUrl}/${id}`, options)
   }
-  
+ 
   getToken():any {
     return localStorage.getItem('token');
   }

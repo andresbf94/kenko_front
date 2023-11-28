@@ -19,6 +19,8 @@ import { PerfilUsuarioComponent } from './views/perfil-usuario/perfil-usuario.co
 import { PerfilAdminComponent } from './views/perfil-admin/perfil-admin.component';
 import { CarritoComponent } from './views/carrito/carrito.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { JwtModule } from '@auth0/angular-jwt';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -37,7 +39,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     LoginComponent,
     PerfilUsuarioComponent,
     PerfilAdminComponent,
-    CarritoComponent,    
+    CarritoComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,8 +48,15 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ReactiveFormsModule,
     FormsModule,
     NgbModule,
-    NgxPaginationModule
-    
+    NgxPaginationModule,
+    NgbNavModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('token'), // Obtén el token de localStorage
+        allowedDomains: ['example.com'], // Dominios permitidos (opcional)
+        disallowedRoutes: ['example.com/login'], // Rutas excluidas (opcional)
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -13,10 +13,8 @@ export class ReservasService {
 
   // Funcion para obtener todas las reservas
 
-  getAll() {
-    return firstValueFrom(
-      this.httpClient.get<any>(this.baseUrl)
-    );
+  getAll(): Observable<any> {   
+      return this.httpClient.get(this.baseUrl);  
   }
 
   //Funcion para obtener una reserva a partir de su id

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, firstValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
-import { Usuario } from '../models/usuario.model';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class UsuariosService {
 
   baseUrl = 'http://localhost:4000/api/usuarios';
 
-  constructor(private http: HttpClient, private router:Router) { }
+  constructor(private http: HttpClient, private router:Router, private jwtHelper: JwtHelperService) { }
 
   getUsers(): Observable<any> {
     return this.http.get(this.baseUrl);
@@ -22,7 +22,7 @@ export class UsuariosService {
     return firstValueFrom(
       this.http.post<any>(`${this.baseUrl}/register`, formValue)
     )
-  }
+  } 
   
   login(formValue:any ){
     return firstValueFrom(
@@ -35,9 +35,32 @@ export class UsuariosService {
     this.router.navigate(['/']);
   }
   
-  isAuth(){
-    return localStorage.getItem('token') ? true : false;
+  
+  isUser(): boolean {
+    const token = localStorage.getItem('token');
+
+    if (token && !this.jwtHelper.isTokenExpired(token)) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      const tieneRolRegular = decodedToken && decodedToken.rol && decodedToken.rol.includes('regular');
+
+      return tieneRolRegular;
+    }
+    return false;
   }
+  isAdmin(): boolean {
+    const token = localStorage.getItem('token');
+
+    if (token && !this.jwtHelper.isTokenExpired(token)) {
+      
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      const tieneRolAdmin = decodedToken && decodedToken.rol && decodedToken.rol.includes('admin');
+
+      return tieneRolAdmin;
+    }
+
+    return false;
+  }
+
 
   getUserById(): Observable<any> {
     const token = this.getToken();

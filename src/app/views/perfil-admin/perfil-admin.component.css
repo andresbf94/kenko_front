@@ -1,0 +1,13 @@
+.contenido{
+    margin-top: 2em;
+    min-height: 62vh;
+}
+
+.tit{
+    font-size: 25px;
+    text-decoration: none;
+    color: rgb(225, 217, 183);
+}
+th{
+    color: rgb(225, 217, 183);
+}

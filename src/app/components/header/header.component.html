@@ -42,10 +42,11 @@
                         <ul class="dropdown-menu">
 
                             <!--Estas dos etiquetas se mostraran solo a los usuarios que no han iniciado sesión-->
-                                <li><a class="dropdown-item"  routerLink="/register" *ngIf="!usuariosService.isAuth()">Registrarse</a></li>
-                                <li><a class="dropdown-item" routerLink="/login" *ngIf="!usuariosService.isAuth()">Iniciar Sesión</a></li>  
-                                <li><a class="dropdown-item" (click)="usuariosService.logout()" *ngIf="usuariosService.isAuth()">Cerrar Sesión</a></li>
-                                <li><a class="dropdown-item" routerLink="/perfil-usuario" *ngIf="usuariosService.isAuth()">Perfil</a></li> 
+                                <li><a class="dropdown-item"  routerLink="/register" *ngIf="!usuariosService.isUser() && !usuariosService.isAdmin()">Registrarse</a></li>
+                                <li><a class="dropdown-item" routerLink="/login" *ngIf="!usuariosService.isUser() && !usuariosService.isAdmin()">Iniciar Sesión</a></li>  
+                                <li><a class="dropdown-item" (click)="usuariosService.logout()" *ngIf="usuariosService.isUser() || usuariosService.isAdmin()">Cerrar Sesión</a></li>
+                                <li><a class="dropdown-item" routerLink="/perfil-usuario" *ngIf="usuariosService.isUser()">Perfil</a></li> 
+                                <li><a class="dropdown-item" routerLink="/perfil-admin" *ngIf="usuariosService.isAdmin()">Perfil</a></li> 
                         </ul>
                     </div>
 

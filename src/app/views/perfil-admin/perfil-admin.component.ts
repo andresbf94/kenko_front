@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, map, tap } from 'rxjs';
+import { forkJoin } from 'rxjs';
 import { Usuario } from 'src/app/models/usuario.model';
 import { PedidosService } from 'src/app/services/pedidos.service';
+import { ReservasService } from 'src/app/services/reservas.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
@@ -9,34 +10,64 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
   templateUrl: './perfil-admin.component.html',
   styleUrls: ['./perfil-admin.component.css']
 })
-export class PerfilAdminComponent implements OnInit{
-
+export class PerfilAdminComponent implements OnInit {
+  active = 'pedidos';
   pedidos: any = [];
+  usuarios: any = [];
+  reservas: any = [];
+  reservasHoy: any = [];
 
-  constructor(private pedidosService: PedidosService, public usuariosService: UsuariosService) {}
+  constructor(
+    public pedidosService: PedidosService, 
+    public usuariosService: UsuariosService,
+    public reservasService: ReservasService
+  ) {}
 
   ngOnInit(): void {
-    this.getPedidos();
-  }
-
-  getPedidos() {
-    this.pedidosService.getPedidos().subscribe(
-      (data: any) => {
-        this.pedidos = data;
-        console.log('pedidos', this.pedidos);
+    this.obtenerReservas();
+    forkJoin({
+      pedidos: this.pedidosService.getPedidos(),
+      usuarios: this.usuariosService.getUsers()
+    }).subscribe(
+      ({ pedidos, usuarios }) => {
+        this.pedidos = pedidos;
+        this.usuarios = usuarios;
       },
       (error: any) => {
-        console.error('Error al obtener pedidos:', error);
+        console.error('Error al obtener datos:', error);
       }
     );
   }
 
-  getUserById(userId: string): Observable<string> {
-    return this.usuariosService.getUsers().pipe(
-      map((users: Usuario[]) => {
-        const user = users.find(user => user._id === userId);
-        return user ? user.nombre : 'Usuario no encontrado';
-      })
+  obtenerNombreUsuario(userId: string): string {
+    const usuario = this.usuarios.find((u: { _id: string; }) => u._id === userId);
+    return usuario ? usuario.nombre : 'Usuario no encontrado';
+  }
+
+  cambiarPestana(pestana: string) {
+    this.active = pestana;
+  }
+
+  obtenerReservas() {
+    this.reservasService.getAll().subscribe(
+      (data: any) => {
+        this.reservas = data;
+        console.log('reservas', this.reservas);
+        this.filtrarReservasHoy();
+      },
+      (error: any) => {
+        console.log(error);
+      }
     );
+  }
+  getFormattedCurrentDate(): string {
+    const currentDate = new Date();
+    return currentDate.toISOString().split('T')[0];
+  }
+
+  filtrarReservasHoy() {
+    const fechaHoy = this.getFormattedCurrentDate();
+    console.log('fechaHoy', fechaHoy);
+    this.reservasHoy = this.reservas.filter((reserva: any) => reserva.fecha.split('T')[0] === fechaHoy);
   }
 }

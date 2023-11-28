@@ -1,9 +1,26 @@
 <app-header></app-header>
-<div class="container">
-    <div class="row contenido">
-      <div class="col-12">
-        <h1 class="bebas_font mb-4 titulos">Lista de Pedidos</h1>
-        <table class="table">
+<div class="container contenido">
+    <div class="row ">
+
+      <!-- NAV -->
+
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link bebas_font tit" (click)="cambiarPestana('pedidos')" [ngClass]="{'active': active === 'pedidos'}">Pedidos</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link bebas_font tit" (click)="cambiarPestana('reservas')" [ngClass]="{'active': active === 'reservas'}">Reservas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link bebas_font tit" (click)="cambiarPestana('productos')" [ngClass]="{'active': active === 'productos'}">Productos</a>
+        </li>
+      </ul>
+
+
+      <!-- PEDIDOS -->
+
+      <div *ngIf="active==='pedidos'">     
+        <table class="table mt-3">
           <thead>
             <tr>
               <th>ID del Pedido</th>
@@ -23,11 +40,48 @@
                   </li>
                 </ul>
               </td>
-              <td><td>{{ (getUserById(pedido.user_id) | async) || 'Usuario no encontrado' }}</td>
+              <td>{{ obtenerNombreUsuario(pedido.user_id) }}</td>
             </tr>
           </tbody>
         </table>
       </div>
+
+      <!-- RESERVAS -->
+
+      <div *ngIf="active==='reservas'; else noReservas">     
+        <table class="table mt-3">
+          <thead>
+            <tr>
+              <th>ID de la Reserva</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Número de Personas</th>
+              <th>Hora</th>
+              <th>Observaciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="reservasHoy.length > 0; else noReservas">
+              <tr *ngFor="let reserva of reservasHoy">
+                <td>{{ reserva._id }}</td>
+                <td>{{ reserva.nombre }}</td>
+                <td>{{ reserva.email }}</td>
+                <td>{{ reserva.numPer }}</td>
+                <td>{{ reserva.hora }}</td>
+                <td>{{ reserva.observaciones }}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+      
+      <ng-template #noReservas>
+        <p>No hay reservas hoy.</p>
+      </ng-template>
+
+
+      <!-- PRODUCTOS -->
+    
     </div>
   </div>
 <app-footer></app-footer>

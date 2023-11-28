@@ -63,11 +63,6 @@ export class PerfilUsuarioComponent implements OnInit {
     this.editando =true;
   }
   
-  cancelarEdicion() {
-    this.editando = false;
-    this.nuevaContrasena = ''; // Limpia el campo de nueva contraseña
-  }
-
   obtenerPedidos() {
     this.pedidosService.getPedidosByUserId().subscribe(
       (data: any) => {
@@ -93,6 +88,7 @@ export class PerfilUsuarioComponent implements OnInit {
       }
 
       const response = await this.usuariosService.updateUser(this.formulario.value);
+      this.edicion();
       console.log('respuesta', response);
     } catch (error) {
       console.error('Error en la solicitud:', error);

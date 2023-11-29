@@ -36,5 +36,7 @@ export class PedidosService {
     const idUsuario = this.usuariosService.getUserID();
     return this.httpClient.get<any>(`${this.baseUrl}/usuario/${idUsuario}`)
   }
-
+  deletePedido(pedidoId:any): Observable<any>{
+    return this.httpClient.delete<any>(`${this.baseUrl}/${pedidoId}`)
+  }
 }

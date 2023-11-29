@@ -70,4 +70,38 @@ export class PerfilAdminComponent implements OnInit {
     console.log('fechaHoy', fechaHoy);
     this.reservasHoy = this.reservas.filter((reserva: any) => reserva.fecha.split('T')[0] === fechaHoy);
   }
+
+  editarPedido(pedidoId: string) {
+    // Aquí debes implementar la lógica para abrir un formulario de edición con el pedido correspondiente.
+    // Puedes utilizar un servicio para comunicarte con otros componentes o un modal para mostrar el formulario.
+    console.log('Editar pedido con ID:', pedidoId);
+  }
+
+  eliminarPedido(pedidoId: string) {
+    // Aquí debes implementar la lógica para confirmar la eliminación del pedido y luego llamar al servicio para eliminarlo.
+    if (confirm('¿Seguro que quieres eliminar este pedido?')) {
+      this.pedidosService.deletePedido(pedidoId).subscribe(
+        (data: any) => {
+          console.log('Pedido eliminado:', data);
+          // Actualizar la lista de pedidos después de eliminar
+          this.actualizarListaPedidos();
+        },
+        (error: any) => {
+          console.error('Error al eliminar pedido:', error);
+        }
+      );
+    }
+  }
+
+  actualizarListaPedidos() {
+    // Actualizar la lista de pedidos después de editar o eliminar un pedido.
+    this.pedidosService.getPedidos().subscribe(
+      (data: any) => {
+        this.pedidos = data;
+      },
+      (error: any) => {
+        console.error('Error al obtener pedidos:', error);
+      }
+    );
+  }
 }

@@ -27,6 +27,7 @@
               <th>Dirección de Entrega</th>
               <th>Productos</th>
               <th>ID del Usuario</th>
+              <th>Acciones</th> <!-- Nueva columna para botones de acciones -->
             </tr>
           </thead>
           <tbody>
@@ -41,14 +42,18 @@
                 </ul>
               </td>
               <td>{{ obtenerNombreUsuario(pedido.user_id) }}</td>
+              <td>
+                <!-- Botones de acciones -->
+                <button class="btn btn-primary" (click)="editarPedido(pedido._id)">Editar</button>
+                <button class="btn btn-danger" (click)="eliminarPedido(pedido._id)">Eliminar</button>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
-
       <!-- RESERVAS -->
 
-      <div *ngIf="active==='reservas'; else noReservas">     
+      <div *ngIf="active==='reservas';">     
         <table class="table mt-3">
           <thead>
             <tr>
@@ -71,15 +76,13 @@
                 <td>{{ reserva.observaciones }}</td>
               </tr>
             </ng-container>
+            <ng-template #noReservas>
+              <p>No hay reservas hoy.</p>
+            </ng-template>
           </tbody>
         </table>
       </div>
       
-      <ng-template #noReservas>
-        <p>No hay reservas hoy.</p>
-      </ng-template>
-
-
       <!-- PRODUCTOS -->
     
     </div>

@@ -49,7 +49,7 @@ export class PerfilUsuarioComponent implements OnInit {
     this.formulario = this.fb.group({
       nombre: [this.usuario?.nombre || '', [Validators.required, Validators.minLength(3)]],
       email: [this.usuario?.email || '', [Validators.required, Validators.email]],
-      password: [this.usuario?.password || '', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       telefono: [this.usuario?.telefono || '', [Validators.minLength(9), Validators.maxLength(15), Validators.pattern(/^[0-9]*$/)]],
       direccion: [this.usuario?.direccion || '', [Validators.required]]
     });

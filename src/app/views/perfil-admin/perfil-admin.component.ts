@@ -16,6 +16,7 @@ export class PerfilAdminComponent implements OnInit {
   usuarios: any = [];
   reservas: any = [];
   reservasHoy: any = [];
+  importesPedidos:any = [];
 
   constructor(
     public pedidosService: PedidosService, 
@@ -25,18 +26,7 @@ export class PerfilAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerReservas();
-    forkJoin({
-      pedidos: this.pedidosService.getPedidos(),
-      usuarios: this.usuariosService.getUsers()
-    }).subscribe(
-      ({ pedidos, usuarios }) => {
-        this.pedidos = pedidos;
-        this.usuarios = usuarios;
-      },
-      (error: any) => {
-        console.error('Error al obtener datos:', error);
-      }
-    );
+    this.obtenerPedidos();
   }
 
   obtenerNombreUsuario(userId: string): string {
@@ -57,6 +47,23 @@ export class PerfilAdminComponent implements OnInit {
       },
       (error: any) => {
         console.log(error);
+      }
+    );
+  }
+
+  obtenerPedidos(){
+    forkJoin({
+      pedidos: this.pedidosService.getPedidos(),
+      usuarios: this.usuariosService.getUsers()
+    }).subscribe(
+      ({ pedidos, usuarios }) => {
+        this.pedidos = pedidos;
+        this.usuarios = usuarios;
+        console.log('pedidos', this.pedidos)
+        this.calcular();
+      },
+      (error: any) => {
+        console.error('Error al obtener datos:', error);
       }
     );
   }
@@ -84,7 +91,7 @@ export class PerfilAdminComponent implements OnInit {
         (data: any) => {
           console.log('Pedido eliminado:', data);
           // Actualizar la lista de pedidos después de eliminar
-          this.actualizarListaPedidos();
+          this.obtenerPedidos();
         },
         (error: any) => {
           console.error('Error al eliminar pedido:', error);
@@ -93,15 +100,34 @@ export class PerfilAdminComponent implements OnInit {
     }
   }
 
-  actualizarListaPedidos() {
-    // Actualizar la lista de pedidos después de editar o eliminar un pedido.
-    this.pedidosService.getPedidos().subscribe(
-      (data: any) => {
-        this.pedidos = data;
-      },
-      (error: any) => {
-        console.error('Error al obtener pedidos:', error);
-      }
-    );
+  obtenerImporte() {
+    const idsProductos: any[] = [];
+
+    this.pedidos.forEach((pedido:any) => {
+     pedido.producto.forEach((producto:any) => {
+        idsProductos.push(producto.id);
+     });
+    });
+    console.log('arrayids', idsProductos);
   }
+
+  calcularImporteTotal(pedido:any) {
+    // Utilizamos la función reduce para sumar los precios de todos los productos en el pedido
+    const importeTotal = pedido.productos.reduce((total:any, producto:any) => {
+      // Accedemos al precio a través de la propiedad producto
+      return total + producto.producto.precio * producto.unidades;
+    }, 0); // El segundo parámetro de reduce es el valor inicial, en este caso, 0
+  
+    return importeTotal;
+  }
+
+  calcular(){
+    this.pedidos.forEach((pedido: any, index: number) => {
+    const importeTotalPedido = this.calcularImporteTotal(pedido);
+    console.log(`Importe total del Pedido ${index + 1}: $${importeTotalPedido}`);
+    });
+  }
+  
+  
+  
 }

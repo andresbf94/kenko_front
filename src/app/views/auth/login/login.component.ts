@@ -29,6 +29,8 @@ export class LoginComponent {
     }
     
     const response = await this.usuariosService.login(this.formulario.value);
+
+    console.log("RESPONSE: ", response)
   
     if(!response.error){
         localStorage.setItem('token', response.token);

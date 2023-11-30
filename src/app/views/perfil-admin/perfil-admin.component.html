@@ -15,11 +15,10 @@
           <a class="nav-link bebas_font tit" (click)="cambiarPestana('productos')" [ngClass]="{'active': active === 'productos'}">Productos</a>
         </li>
       </ul>
-
-
+      
       <!-- PEDIDOS -->
 
-      <div *ngIf="active==='pedidos'">     
+      <div *ngIf="active === 'pedidos'">     
         <table class="table mt-3">
           <thead>
             <tr>
@@ -27,6 +26,7 @@
               <th>Dirección de Entrega</th>
               <th>Productos</th>
               <th>ID del Usuario</th>
+              <th>Importe Total</th> <!-- Nueva columna para el importe total -->
               <th>Acciones</th> <!-- Nueva columna para botones de acciones -->
             </tr>
           </thead>
@@ -42,6 +42,7 @@
                 </ul>
               </td>
               <td>{{ obtenerNombreUsuario(pedido.user_id) }}</td>
+              <td>{{ calcularImporteTotal(pedido) }} €</td> <!-- Llamada a la función calcularImporteTotal -->
               <td>
                 <!-- Botones de acciones -->
                 <button class="btn btn-primary" (click)="editarPedido(pedido._id)">Editar</button>

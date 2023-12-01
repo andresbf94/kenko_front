@@ -19,15 +19,16 @@
       <!-- PEDIDOS -->
 
       <div *ngIf="active === 'pedidos'">     
-        <table class="table mt-3">
+        <table class="table mt-3 w-100">
           <thead>
             <tr>
               <th>ID del Pedido</th>
               <th>Dirección de Entrega</th>
               <th>Productos</th>
-              <th>ID del Usuario</th>
-              <th>Importe Total</th> <!-- Nueva columna para el importe total -->
-              <th>Acciones</th> <!-- Nueva columna para botones de acciones -->
+              <th class="text-center">Unidades</th> <!-- Nueva columna para las unidades -->
+              <th class="text-center">ID del Usuario</th>
+              <th class="text-center">Importe Total</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -37,21 +38,32 @@
               <td>
                 <ul>
                   <li *ngFor="let producto of pedido.productos">
-                    {{ producto.producto.nombre }} - {{ producto.unidades }} unidades
+                    {{ producto.producto.nombre }}
                   </li>
                 </ul>
               </td>
-              <td>{{ obtenerNombreUsuario(pedido.user_id) }}</td>
-              <td>{{ calcularImporteTotal(pedido) }} €</td> <!-- Llamada a la función calcularImporteTotal -->
+              <td class="text-center">
+                <ul>
+                  <li *ngFor="let producto of pedido.productos">
+                    {{ producto.unidades }} 
+                  </li>
+                </ul>
+              </td>
+              <td class="text-center">{{ obtenerNombreUsuario(pedido.user_id) }}</td>
+              <td class="text-center">{{ calcularImporteTotal(pedido) }} €</td>
               <td>
-                <!-- Botones de acciones -->
-                <button class="btn btn-primary" (click)="editarPedido(pedido._id)">Editar</button>
-                <button class="btn btn-danger" (click)="eliminarPedido(pedido._id)">Eliminar</button>
+                <button class="btn btn-secondary mx-2" (click)="abrirModalEditarPedido(pedido._id)">
+                  <i class="bi bi-pencil-square"></i>
+                </button>
+                <button class="btn btn-danger" (click)="eliminarPedido(pedido._id)">
+                  <i class="bi bi-trash3"></i>
+                </button>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
+      
       <!-- RESERVAS -->
 
       <div *ngIf="active==='reservas';">     

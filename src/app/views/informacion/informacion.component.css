@@ -1,13 +1,16 @@
 .contenido{
     min-height: 67vh;
 }
-
-.icon{
-    color:white;
+.row p label{
+    color: white;
+}
+.icon {
+    color: rgb(225, 217, 183);
     width: 25px;
     margin-right: 1em;
+    font-size: 1.3em;
 }
 
 .margen{
-    margin-left: 45px;
+    margin-left: 43px;
 }

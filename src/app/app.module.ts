@@ -21,9 +21,7 @@ import { CarritoComponent } from './views/carrito/carrito.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
-
-
-
+import { EditPedidoComponent } from './components/edit-pedido/edit-pedido.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +38,7 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
     PerfilUsuarioComponent,
     PerfilAdminComponent,
     CarritoComponent,
+    EditPedidoComponent,
   ],
   imports: [
     BrowserModule,

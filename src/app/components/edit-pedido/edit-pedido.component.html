@@ -1,0 +1,49 @@
+<div class="modal-header">
+    <h4 class="modal-title">Editar Pedido</h4>
+    <button type="button" class="close btn btn-secondary" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  
+  <div class="modal-body">
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <!-- Otros campos del formulario -->
+      
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" formControlName="direccion">
+      
+        <label for="estado">Estado:</label>
+        <input type="text" id="estado" formControlName="estado">
+      
+        <!-- Formulario para productos -->
+        <div formArrayName="productos">
+          <div *ngFor="let producto of editForm.get('productos').controls; let i = index" class="producto-group">
+            <div [formGroupName]="i" class="producto-inner-group">
+              <!-- Nombre del Producto -->
+              <label>{{ producto.get('producto.nombre').value }}</label>
+      
+              <!-- Unidades -->
+              <label for="unidades">Unidades:</label>
+              <input type="text" id="unidades" formControlName="unidades">
+      
+              <!-- Botón para eliminar producto -->
+              <button type="button" (click)="eliminarProducto(i)">Eliminar Producto</button>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Menú desplegable para seleccionar productos -->
+        <label for="nuevoProducto">Seleccionar Producto:</label>
+        <select id="nuevoProducto" formControlName="nuevoProducto">
+        <option *ngFor="let producto of listaProductos" [value]="producto._id">{{ producto.nombre }}</option>
+        </select>
+
+        <!-- Ingreso de unidades para el nuevo producto -->
+        <label for="unidadesNuevoProducto">Unidades del Nuevo Producto:</label>
+        <input type="text" id="unidadesNuevoProducto" formControlName="unidadesNuevoProducto">
+
+        <button type="button" (click)="anadirProducto()">Añadir Producto</button>
+
+        <button type="submit">Guardar</button>
+      </form>
+  </div>

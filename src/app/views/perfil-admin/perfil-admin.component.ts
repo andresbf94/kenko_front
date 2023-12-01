@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin } from 'rxjs';
+import { EditPedidoComponent } from 'src/app/components/edit-pedido/edit-pedido.component';
 import { Usuario } from 'src/app/models/usuario.model';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { ReservasService } from 'src/app/services/reservas.service';
@@ -21,7 +23,8 @@ export class PerfilAdminComponent implements OnInit {
   constructor(
     public pedidosService: PedidosService, 
     public usuariosService: UsuariosService,
-    public reservasService: ReservasService
+    public reservasService: ReservasService,
+    public modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -67,6 +70,7 @@ export class PerfilAdminComponent implements OnInit {
       }
     );
   }
+
   getFormattedCurrentDate(): string {
     const currentDate = new Date();
     return currentDate.toISOString().split('T')[0];
@@ -127,7 +131,10 @@ export class PerfilAdminComponent implements OnInit {
     console.log(`Importe total del Pedido ${index + 1}: $${importeTotalPedido}`);
     });
   }
-  
-  
-  
+    
+  abrirModalEditarPedido(pedidoId: String){
+    const modalRef = this.modalService.open(EditPedidoComponent, {size: 'lg'});
+    modalRef.componentInstance.pedidoId = pedidoId;
+  } 
+
 }

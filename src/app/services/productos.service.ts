@@ -2,13 +2,14 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { serverRoute } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductosService {
 
-  baseUrl = 'http://localhost:4000/api/productos';
+  baseUrl = serverRoute + '/api/productos';
 
   constructor(private httpClient: HttpClient) { }
 

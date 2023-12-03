@@ -4,13 +4,14 @@ import { Observable, firstValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { serverRoute } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuariosService {
 
-  baseUrl = 'http://localhost:4000/api/usuarios';
+  baseUrl = serverRoute + '/api/usuarios';
 
   constructor(private http: HttpClient, private router:Router, private jwtHelper: JwtHelperService) { }
 

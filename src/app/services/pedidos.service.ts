@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, firstValueFrom, throwError } from 'rxjs';
 import { UsuariosService } from './usuarios.service';
+import { serverRoute } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PedidosService {
 
-  baseUrl = 'http://localhost:4000/api/pedidos';
+  baseUrl = serverRoute + '/api/pedidos';
 
   constructor(private http: HttpClient, private usuariosService: UsuariosService) { }
 

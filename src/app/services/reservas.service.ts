@@ -1,13 +1,14 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, throwError, firstValueFrom, Observable } from 'rxjs';
+import { serverRoute } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservasService {
 
-  baseUrl = 'http://localhost:4000/api/reservas';
+  baseUrl = serverRoute + '/api/reservas';
 
   constructor(private httpClient: HttpClient) { }
 

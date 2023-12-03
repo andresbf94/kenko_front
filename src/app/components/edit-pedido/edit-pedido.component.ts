@@ -18,9 +18,9 @@ export class EditPedidoComponent implements OnInit {
   listaProductos:any = [];
 
   constructor(
-    private pedidosService: PedidosService,
+    public pedidosService: PedidosService,
     private formBuilder: FormBuilder,
-    private productosService: ProductosService,
+    public productosService: ProductosService,
     public activeModal: NgbActiveModal
   ) {}
 

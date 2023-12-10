@@ -1,5 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Producto } from "../models/producto.model";
+import { serverRoute } from "../app.component";
+import { Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +11,9 @@ export class CarritoService {
 
   carrito: any[] = [];
   total: number = 0;
+  url: string = serverRoute + '/api/pagos';
 
-  constructor() { }
+  constructor( private http: HttpClient) { }
   
   agregar(producto: Producto, unidades: number) {
     // Verificar si el producto ya está en el carrito
@@ -51,6 +55,12 @@ export class CarritoService {
     this.carrito.forEach((item:any) =>{
       this.total += item.producto.precio * item.unidades;
     })
+  }
+
+  pagarEnStripe(totalAmount: number): Observable<string> {
+    const body = { totalAmount };
+    console.log('cuerpo', body);
+    return this.http.post<string>(`${this.url}`, body);
   }
 
 }

@@ -89,11 +89,13 @@
           </div>
         </form>            
   </div>
-
-  <div *ngIf="reservaRealizada" class="text-center">
-      <h2 class="mt-5" style="margin-top: 100px;">¡Reserva realizada con éxito!</h2>
+<div class="container">
+  <div *ngIf="reservaRealizada" class="text-center contenido ">
+      <h2 class="mt-5 bebas_font titulo_vista" style="margin-top: 100px;">¡Reserva realizada con éxito!</h2>
       <img class="mt-5" src="../../../assets/images/enviar-datos.png" style="height: 100px; width: auto;">
       <p class="mt-5">Se le ha enviado un correo con los detalles de la reserva</p>
   </div>
+</div>
+  
 
 <app-footer></app-footer>

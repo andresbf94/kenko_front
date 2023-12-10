@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-export const serverRoute = 'http://localhost:4000'; 
+export const serverRoute = 'https://kenko-server.onrender.comn'; 
 
 @Component({
   selector: 'app-root',

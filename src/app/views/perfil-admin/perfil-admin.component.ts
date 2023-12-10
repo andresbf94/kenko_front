@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin } from 'rxjs';
 import { EditPedidoComponent } from 'src/app/components/edit-pedido/edit-pedido.component';
@@ -24,7 +25,8 @@ export class PerfilAdminComponent implements OnInit {
     public pedidosService: PedidosService, 
     public usuariosService: UsuariosService,
     public reservasService: ReservasService,
-    public modalService: NgbModal
+    public modalService: NgbModal,
+    public router:Router
   ) {}
 
   ngOnInit(): void {
@@ -82,12 +84,6 @@ export class PerfilAdminComponent implements OnInit {
     this.reservasHoy = this.reservas.filter((reserva: any) => reserva.fecha.split('T')[0] === fechaHoy);
   }
 
-  editarPedido(pedidoId: string) {
-    // Aquí debes implementar la lógica para abrir un formulario de edición con el pedido correspondiente.
-    // Puedes utilizar un servicio para comunicarte con otros componentes o un modal para mostrar el formulario.
-    console.log('Editar pedido con ID:', pedidoId);
-  }
-
   eliminarPedido(pedidoId: string) {
     // Aquí debes implementar la lógica para confirmar la eliminación del pedido y luego llamar al servicio para eliminarlo.
     if (confirm('¿Seguro que quieres eliminar este pedido?')) {
@@ -118,9 +114,8 @@ export class PerfilAdminComponent implements OnInit {
   calcularImporteTotal(pedido:any) {
     // Utilizamos la función reduce para sumar los precios de todos los productos en el pedido
     const importeTotal = pedido.productos.reduce((total:any, producto:any) => {
-      // Accedemos al precio a través de la propiedad producto
       return total + producto.producto.precio * producto.unidades;
-    }, 0); // El segundo parámetro de reduce es el valor inicial, en este caso, 0
+    }, 0); 
   
     return importeTotal;
   }
@@ -133,8 +128,17 @@ export class PerfilAdminComponent implements OnInit {
   }
     
   abrirModalEditarPedido(pedidoId: String){
-    const modalRef = this.modalService.open(EditPedidoComponent, {size: 'lg'});
-    modalRef.componentInstance.pedidoId = pedidoId;
+  const modalRef = this.modalService.open(EditPedidoComponent, { size: 'lg' });
+  modalRef.componentInstance.pedidoId = pedidoId;
+
+  // Suscribe al evento 'hidden' del modal para recargar la página después de cerrarlo
+  modalRef.hidden.subscribe(() => {
+    this.recargarPagina();
+    });
   } 
+
+recargarPagina() {
+  window.location.reload();
+}
 
 }

@@ -25,8 +25,23 @@ export class CarritoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+ 
 
   }
+  urlPagoStripe: string='';
+
+pagarEnStripe() {
+  this.carritoService.pagarEnStripe(this.carritoService.total).subscribe(
+    (data: string) => {
+      this.urlPagoStripe = data;
+      // Aquí puedes redirigir al usuario a la URL obtenida, por ejemplo:
+      window.location.href = this.urlPagoStripe
+    },
+    (error: any) => {
+      console.error('Error al realizar el pago en Stripe:', error);
+    }
+  );
+}
   // Obtiene los datos del usuario autenticado y los envia junto con los del carrito para la creacion de un pedido 
   async enviarPedido() {
     try {
@@ -37,7 +52,7 @@ export class CarritoComponent implements OnInit {
         direccion: userData.direccion,
         productos: this.carritoService.carrito  
       };
-
+      
       await this.pedidosService.enviarPedido(this.pedido);
       this.carritoService.carrito = []; // Pongo a cero el carrito
       this.pedidoEnviado = true;

@@ -33,6 +33,8 @@ export class ReservasComponent {
         if(response){
           this.mailService.sendConfimationMail(this.formulario.value);
           this.reservaRealizada = true;
+          console.log('res realizada', this.reservaRealizada)
+
         }
             
       } catch (error) {

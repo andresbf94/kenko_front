@@ -1,49 +1,67 @@
 <div class="modal-header">
-    <h4 class="modal-title">Editar Pedido</h4>
-    <button type="button" class="close btn btn-secondary" aria-label="Close" (click)="closeModal()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  
-  <div class="modal-body">
-    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
-        <!-- Otros campos del formulario -->
-      
+  <h2 class="modal-title bebas_font">Editar Pedido</h2>
+  <button type="button" class="close btn btn-secondary" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="container">
+
+    <div class="row mb-4">
+      <div class="form-group col-md-6">
         <label for="direccion">Dirección:</label>
-        <input type="text" id="direccion" formControlName="direccion">
-      
+        <input type="text" id="direccion" formControlName="direccion" class="form-control">
+      </div>
+
+      <div class="form-group col-md-6">
         <label for="estado">Estado:</label>
-        <input type="text" id="estado" formControlName="estado">
-      
-        <!-- Formulario para productos -->
-        <div formArrayName="productos">
-          <div *ngFor="let producto of editForm.get('productos').controls; let i = index" class="producto-group">
-            <div [formGroupName]="i" class="producto-inner-group">
-              <!-- Nombre del Producto -->
-              <label>{{ producto.get('producto.nombre').value }}</label>
-      
-              <!-- Unidades -->
-              <label for="unidades">Unidades:</label>
-              <input type="text" id="unidades" formControlName="unidades">
-      
-              <!-- Botón para eliminar producto -->
-              <button type="button" (click)="eliminarProducto(i)">Eliminar Producto</button>
-            </div>
+        <input type="text" id="estado" formControlName="estado" class="form-control">
+      </div>
+    </div>
+
+    <div formArrayName="productos">
+      <h3 class="bebas_font mt-3 mb-3">Productos</h3>
+      <div *ngFor="let producto of editForm.get('productos').controls; let i = index" class="mb-3">
+        <div [formGroupName]="i" class="row producto-group">
+          <label class="col-4">{{ producto.get('producto.nombre').value }}</label>
+
+          <div class="form-group col-4 d-flex ">
+            <label for="unidades">Unidades: </label>
+            <input type="text" id="unidades" formControlName="unidades" class="form-control mx-2">
           </div>
+
+          <button type="button" (click)="eliminarProducto(i)" class="btn btn-danger w-auto">
+            <i class="bi bi-trash3"></i>
+          </button>
         </div>
-      
-        <!-- Menú desplegable para seleccionar productos -->
+      </div>
+    </div>
+  
+
+    <div class="row mb-4 d-flex">
+      <h3 class="bebas_font mt-3 mb-3">Añadir nuevo producto</h3>
+      <div class="form-group col-md-4 justify-content-end  ">
         <label for="nuevoProducto">Seleccionar Producto:</label>
-        <select id="nuevoProducto" formControlName="nuevoProducto">
-        <option *ngFor="let producto of listaProductos" [value]="producto._id">{{ producto.nombre }}</option>
+        <select id="nuevoProducto" formControlName="nuevoProducto" class="form-control">
+          <option *ngFor="let producto of listaProductos" [value]="producto._id">{{ producto.nombre }}</option>
         </select>
+      </div>
 
-        <!-- Ingreso de unidades para el nuevo producto -->
-        <label for="unidadesNuevoProducto">Unidades del Nuevo Producto:</label>
-        <input type="text" id="unidadesNuevoProducto" formControlName="unidadesNuevoProducto">
+      <div class="form-group col-md-4 justify-content-end ">
+        <label for="unidadesNuevoProducto">Unidades: </label>
+        <input type="text" id="unidadesNuevoProducto" formControlName="unidadesNuevoProducto" class="form-control">
+      </div>
 
-        <button type="button" (click)="anadirProducto()">Añadir Producto</button>
+      
+        <div class="form-group col-md-4 justify-content-end">
+          <button type="button" (click)="anadirProducto()" class="btn btn-primary w-auto">Añadir</button>
+        </div>
+    </div>
 
-        <button type="submit">Guardar</button>
-      </form>
-  </div>
+      
+        <button type="submit" class="btn btn-secondary" (click)="closeModal()">Hecho</button>
+      
+   
+  </form>
+</div>

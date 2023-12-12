@@ -24,7 +24,7 @@ const routes: Routes =[
   { path: 'login', component: LoginComponent},
   { path: 'perfil-usuario', component: PerfilUsuarioComponent, canActivate: [usuarioGuard]},
   { path: 'perfil-admin', component: PerfilAdminComponent, canActivate: [adminGuard]},
-  { path: 'carrito', component: CarritoComponent, canActivate: [usuarioGuard]},
+  { path: 'carrito', component: CarritoComponent, canActivate: [usuarioGuard, carritoGuard]},
   
 ] 
 

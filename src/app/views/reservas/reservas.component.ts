@@ -13,6 +13,7 @@ export class ReservasComponent {
   formulario: FormGroup;
   mensaje: string = '';
   reservaRealizada=  false;
+  fechaMinima= new Date().toISOString().split('T')[0];
 
   constructor( private reservasService:ReservasService, fb:FormBuilder, private mailService: MailService){
     this.formulario = fb.group({
@@ -27,18 +28,14 @@ export class ReservasComponent {
 
   async onSubmit() {
     if(this.formulario.valid){
-      try {
-        const response = await this.reservasService.create(this.formulario.value);
-        console.log('response', response)
-        if(response){
-          this.mailService.sendConfimationMail(this.formulario.value);
-          this.reservaRealizada = true;
-          console.log('res realizada', this.reservaRealizada)
+      const response = await this.reservasService.create(this.formulario.value);  
+      this.mensaje= response;
 
-        }
-            
-      } catch (error) {
-        this.mensaje = 'Lo sentimos, el aforo maximo ha sido alcanzado';
+      if(response.mensaje === 'Reserva exitosa'){
+        this.mailService.sendConfimationMail(this.formulario.value);
+        this.reservaRealizada = true;
+      } else {
+        this.mensaje= response.mensaje;
       }
     } 
   }
@@ -46,5 +43,6 @@ export class ReservasComponent {
   eliminarMensaje(){
     this.mensaje = '';
   }
+
 
 }

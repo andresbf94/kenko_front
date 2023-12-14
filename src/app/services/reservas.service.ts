@@ -31,7 +31,5 @@ export class ReservasService {
       this.httpClient.post<any>(this.baseUrl, formValues)
     );
   }
-  //Funcion para el manejo de errores
-
   
 }

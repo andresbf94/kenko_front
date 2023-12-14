@@ -36,7 +36,6 @@ export class UsuariosService {
     this.router.navigate(['/']);
   }
   
-  
   isUser(): boolean {
     const token = localStorage.getItem('token');
 
@@ -48,6 +47,7 @@ export class UsuariosService {
     }
     return false;
   }
+  
   isAdmin(): boolean {
     const token = localStorage.getItem('token');
 

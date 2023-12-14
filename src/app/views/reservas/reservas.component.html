@@ -52,7 +52,7 @@
         
             <div class="mb-3 col-lg-4">
               <label for="fecha" class="form-label">Fecha</label>
-              <input type="date" name="fecha" class="form-control" id="fecha" min="" required formControlName="fecha">
+              <input type="date" name="fecha" class="form-control" id="fecha" [min]="fechaMinima" required formControlName="fecha">
               
               <div *ngIf="formulario.get('fecha')?.touched && formulario.get('fecha')?.invalid" class="text-danger mx-1">
                 <div *ngIf="formulario.get('fecha')?.hasError('required')">La fecha es obligatoria</div>
@@ -75,18 +75,14 @@
             </div>                
           </div>
         
-          <div class="text-center">
-            <div *ngIf="formulario.valid && mensaje==='Reserva realizada con exito'">
-              <div class="alert alert-success d-inline-block " role="alert">
-                <i class="bi bi-check-circle"></i> &nbsp; {{mensaje}}
-              </div>
-            </div>                    
-            <div *ngIf="formulario.valid && mensaje==='Lo sentimos, el aforo maximo ha sido alcanzado'">
+          <div class="text-center">                
+            <div *ngIf="formulario.valid && mensaje==='El aforo máximo ha sido alcanzado para esta combinación'">
               <div class="alert alert-danger d-inline-block " role="alert">
                 <i class="bi bi-exclamation-triangle"></i>&nbsp; {{mensaje}} 
               </div>  
             </div>
           </div>
+          
         </form>            
   </div>
 <div class="container">

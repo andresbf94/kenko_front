@@ -31,10 +31,11 @@ export class CarritoComponent implements OnInit {
   urlPagoStripe: string='';
 
 pagarEnStripe() {
+
   this.carritoService.pagarEnStripe(this.carritoService.total).subscribe(
     (data: string) => {
       this.urlPagoStripe = data;
-      this.enviarPedido();
+      
       window.location.href = this.urlPagoStripe
     },
     (error: any) => {

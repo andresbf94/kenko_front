@@ -18,7 +18,7 @@ export class RegisterComponent {
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      telefono: ['', [Validators.minLength(9), Validators.maxLength(15), Validators.pattern(/^[0-9]*$/)]],
+      telefono: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(15), Validators.pattern(/^[0-9]*$/)]],
       direccion: ['', [Validators.required]]
     });
   }

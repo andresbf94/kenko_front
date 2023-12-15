@@ -34,7 +34,7 @@ pagarEnStripe() {
   this.carritoService.pagarEnStripe(this.carritoService.total).subscribe(
     (data: string) => {
       this.urlPagoStripe = data;
-      // Aquí puedes redirigir al usuario a la URL obtenida, por ejemplo:
+      
       window.location.href = this.urlPagoStripe
     },
     (error: any) => {
@@ -42,7 +42,7 @@ pagarEnStripe() {
     }
   );
 }
-  // Obtiene los datos del usuario autenticado y los envia junto con los del carrito para la creacion de un pedido 
+
   async enviarPedido() {
     try {
       const userData = await this.usuariosService.getUserById().toPromise();

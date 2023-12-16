@@ -2,3 +2,6 @@ routes:
 - type: rewrite
   source: /
   destination: /index.html
+- type: rewrite
+  source: /informacion
+  destination: /index.html

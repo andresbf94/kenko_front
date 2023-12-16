@@ -4,4 +4,4 @@ routes:
   destination: /index.html
 - type: rewrite
   source: /informacion
-  destination: /index.html
+  destination: /informacion.component.html

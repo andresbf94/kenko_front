@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-6 p-3" *ngFor="let producto of categoria.value">
                             <div class="card carta">
-                                <img [src]="serverUrl + '/' + producto.imagen" class="card-img-top imagen_carta" [alt]="producto.nombre">
+                                <img [src]="'../../../assets/images/' + producto.imagen" rel="preload" as="image" class="card-img-top imagen_carta" [alt]="producto.nombre" loading="lazy">
                                 <h5 class="card-title mx-4 mt-3">{{ producto.nombre }}</h5>
                                 <p class="card-text mx-4">{{ producto.descripcion }}</p>
                                 <p class="card-text mx-4">{{ producto.precio }} €</p>

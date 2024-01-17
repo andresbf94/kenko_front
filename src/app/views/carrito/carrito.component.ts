@@ -32,7 +32,7 @@ export class CarritoComponent implements OnInit {
 
 pagarEnStripe() {
 
-  this.carritoService.pagarEnStripe(this.carritoService.total).subscribe(
+  this.carritoService.pagarEnStripe(this.carritoService.carrito).subscribe(
     (data: string) => {
       this.urlPagoStripe = data;
       

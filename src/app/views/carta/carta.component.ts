@@ -17,7 +17,7 @@ export class CartaComponent {
 
   serverUrl = serverRoute;
   productos: any = [];
-  categoriasProductos: { [key: string]: any[] } = {};
+  categoriasProductos: { [key: string]: any[]} = {};
   ud:number = 0;
 
   carritoService = inject (CarritoService);

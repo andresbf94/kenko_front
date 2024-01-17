@@ -57,8 +57,8 @@ export class CarritoService {
     })
   }
 
-  pagarEnStripe(totalAmount: number): Observable<string> {
-    const body = { totalAmount };
+  pagarEnStripe(productos: any): Observable<string> {
+    const body = { productos };
     console.log('cuerpo', body);
     return this.http.post<string>(`${this.url}`, body);
   }

@@ -22,6 +22,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditPedidoComponent } from './components/edit-pedido/edit-pedido.component';
+import { TruncatePipe } from './pipes/truncate.pipe';
+
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { EditPedidoComponent } from './components/edit-pedido/edit-pedido.compon
     PerfilAdminComponent,
     CarritoComponent,
     EditPedidoComponent,
+    TruncatePipe
+    
   ],
   imports: [
     BrowserModule,

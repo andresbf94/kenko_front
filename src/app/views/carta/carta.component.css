@@ -5,10 +5,7 @@ section{
 }
 
 .card-text {
-    max-height: 3em; /* Establece la altura máxima en 3 líneas */
-    overflow: hidden;
-    text-overflow: ellipsis; /* Agrega puntos suspensivos (...) si el texto se recorta */
-    white-space: nowrap; /* Evita el desbordamiento de texto a la siguiente línea */
+     /* Evita el desbordamiento de texto a la siguiente línea */
 }
 
 .imagen_carta {

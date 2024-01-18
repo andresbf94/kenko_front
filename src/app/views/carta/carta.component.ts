@@ -6,6 +6,7 @@ import { CarritoService } from 'src/app/services/carrito.service';
 interface Producto {
   
   unidades: number;
+  longitudDescripcion: number;
 }
 
 @Component({
@@ -19,9 +20,9 @@ export class CartaComponent {
   productos: any = [];
   categoriasProductos: { [key: string]: any[]} = {};
   ud:number = 0;
-
+  mostrarDescripcion: boolean = false;
   carritoService = inject (CarritoService);
-
+  longitudDescripcion: number = 25;
   constructor(private productoService: ProductosService) {
   }
 
@@ -29,7 +30,10 @@ export class CartaComponent {
     this.obtenerProductos(); 
     
   }
-  
+
+  cambiarLongitudDescripcion(nuevaLongitud: number) {
+    this.longitudDescripcion = nuevaLongitud;
+  }
   obtenerProductos() {
     this.productoService.getAll().subscribe({
       next: data => {
@@ -48,6 +52,7 @@ export class CartaComponent {
       if (!this.categoriasProductos[producto.categoria]) {
         this.categoriasProductos[producto.categoria] = [];
       }
+      producto.longitudDescripcion = 25; // Inicializa la longitud de la descripción
       this.categoriasProductos[producto.categoria].push(producto);
     });
   }

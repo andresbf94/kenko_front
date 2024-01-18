@@ -14,7 +14,11 @@
                             <div class="card carta">
                                 <img [src]="'../../../assets/images/' + producto.imagen" rel="preload" as="image" class="card-img-top imagen_carta" [alt]="producto.nombre" loading="lazy">
                                 <h5 class="card-title mx-4 mt-3">{{ producto.nombre }}</h5>
-                                <p class="card-text mx-4">{{ producto.descripcion }}</p>
+                                <p class="card-text mx-4">
+                                    {{ producto.descripcion | truncate:producto.longitudDescripcion }}
+                                    <a *ngIf="producto.longitudDescripcion == 25" class="leer-mas" (click)="producto.longitudDescripcion = 100 ; mostrarDescripcion=false"> <br> Leer más</a>
+                                    <a *ngIf="producto.longitudDescripcion == 100" class="leer-menos" (click)="producto.longitudDescripcion = 25; mostrarDescripcion= true"> <br> Leer menos</a>
+                                  </p>
                                 <p class="card-text mx-4">{{ producto.precio }} €</p>
                                 <div class="card-textv d-inline-flex text-center mb-3">
                                   

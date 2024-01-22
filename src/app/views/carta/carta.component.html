@@ -16,8 +16,8 @@
                                 <h5 class="card-title mx-4 mt-3">{{ producto.nombre }}</h5>
                                 <p class="card-text mx-4">
                                     {{ producto.descripcion | truncate:producto.longitudDescripcion }}
-                                    <a *ngIf="producto.longitudDescripcion == 25" class="leer-mas" (click)="producto.longitudDescripcion = 100 ; mostrarDescripcion=false"> <br> Leer más</a>
-                                    <a *ngIf="producto.longitudDescripcion == 100" class="leer-menos" (click)="producto.longitudDescripcion = 25; mostrarDescripcion= true"> <br> Leer menos</a>
+                                    <a id="leer" *ngIf="producto.longitudDescripcion == 25" class="leer-mas" (click)="producto.longitudDescripcion = 100 ; mostrarDescripcion=false"> <br> Leer más</a>
+                                    <a id="leer" *ngIf="producto.longitudDescripcion == 100" class="leer-menos" (click)="producto.longitudDescripcion = 25; mostrarDescripcion= true"> <br> Leer menos</a>
                                   </p>
                                 <p class="card-text mx-4">{{ producto.precio }} €</p>
                                 <div class="card-textv d-inline-flex text-center mb-3">

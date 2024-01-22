@@ -23,17 +23,18 @@ export class CartaComponent {
   mostrarDescripcion: boolean = false;
   carritoService = inject (CarritoService);
   longitudDescripcion: number = 25;
+
   constructor(private productoService: ProductosService) {
   }
 
   ngOnInit() {
-    this.obtenerProductos(); 
-    
+    this.obtenerProductos();  
   }
 
   cambiarLongitudDescripcion(nuevaLongitud: number) {
     this.longitudDescripcion = nuevaLongitud;
   }
+
   obtenerProductos() {
     this.productoService.getAll().subscribe({
       next: data => {

@@ -23,6 +23,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditPedidoComponent } from './components/edit-pedido/edit-pedido.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
+import { PedidoRealizadoComponent } from './components/pedido-realizado/pedido-realizado.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     PerfilAdminComponent,
     CarritoComponent,
     EditPedidoComponent,
-    TruncatePipe
+    TruncatePipe,
+    PedidoRealizadoComponent
     
   ],
   imports: [

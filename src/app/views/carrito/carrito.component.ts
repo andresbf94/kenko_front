@@ -16,7 +16,6 @@ export class CarritoComponent implements OnInit {
   itemsPerPage = this.carritoService.carrito.length;
   tokenUsuario = this.usuariosService.getToken();         
   idUsuario = this.usuariosService.getUserID();
-  pedidoEnviado = false;
   
   constructor(
     public carritoService: CarritoService, 
@@ -56,7 +55,7 @@ pagarEnStripe() {
       
       await this.pedidosService.enviarPedido(this.pedido);
       this.carritoService.carrito = []; // Pongo a cero el carrito
-      this.pedidoEnviado = true;
+      
     } catch (error) {
       console.error('Error al obtener los datos del usuario o enviar el pedido', error);
     }
